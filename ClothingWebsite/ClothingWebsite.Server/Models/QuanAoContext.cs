@@ -15,109 +15,108 @@ public partial class QuanAoContext : DbContext
     {
     }
 
-    public virtual DbSet<Account> Accounts { get; set; }
+    public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
 
-    public virtual DbSet<CustomerProduct> CustomerProducts { get; set; }
+    public virtual DbSet<MauSanPham> MauSanPhams { get; set; }
 
-    public virtual DbSet<Product> Products { get; set; }
+    public virtual DbSet<SanPham> SanPhams { get; set; }
 
-    public virtual DbSet<ProductColor> ProductColors { get; set; }
+    public virtual DbSet<SanPhamKhachHang> SanPhamKhachHangs { get; set; }
 
-    public virtual DbSet<ProductType> ProductTypes { get; set; }
+    public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=HELPMEIMBLIND\\SQLEXPRESS;Database=QuanAo;Trusted_Connection=True;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Account>(entity =>
+        modelBuilder.Entity<LoaiSanPham>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__46A222CDB5ED18D8");
+            entity.HasKey(e => e.MaLoai).HasName("PK__LoaiSanP__730A5759C110543F");
 
-            entity.ToTable("Account");
+            entity.ToTable("LoaiSanPham");
 
-            entity.HasIndex(e => e.Username, "UQ__Account__F3DBC5729A2E0E73").IsUnique();
+            entity.HasIndex(e => e.Loai, "UQ__LoaiSanP__4E48BB75231FA042").IsUnique();
 
-            entity.Property(e => e.AccountId).HasColumnName("account_id");
+            entity.Property(e => e.Loai)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<MauSanPham>(entity =>
+        {
+            entity.HasKey(e => e.MaMau).HasName("PK__MauSanPh__3A5BBB7D8523C8FE");
+
+            entity.ToTable("MauSanPham");
+
+            entity.HasIndex(e => e.Mau, "UQ__MauSanPh__C7977BC2A4AF3D99").IsUnique();
+
+            entity.Property(e => e.Mau)
+                .HasMaxLength(30)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<SanPham>(entity =>
+        {
+            entity.HasKey(e => e.MaSanPham).HasName("PK__SanPham__FAC7442DA12C8AC9");
+
+            entity.ToTable("SanPham");
+
+            entity.Property(e => e.MaSanPham)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.SanPhams)
+                .HasForeignKey(d => d.MaLoai)
+                .HasConstraintName("FK__SanPham__MaLoai__4222D4EF");
+
+            entity.HasOne(d => d.MaMauNavigation).WithMany(p => p.SanPhams)
+                .HasForeignKey(d => d.MaMau)
+                .HasConstraintName("FK__SanPham__MaMau__4316F928");
+        });
+
+        modelBuilder.Entity<SanPhamKhachHang>(entity =>
+        {
+            entity.HasKey(e => new { e.MaTaiKhoan, e.MaSanPham }).HasName("PK__SanPhamK__62D0116B4FE28E24");
+
+            entity.ToTable("SanPhamKhachHang");
+
+            entity.Property(e => e.MaTaiKhoan)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.MaSanPham)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.MaSanPhamNavigation).WithMany(p => p.SanPhamKhachHangs)
+                .HasForeignKey(d => d.MaSanPham)
+                .HasConstraintName("FK__SanPhamKh__MaSan__47DBAE45");
+
+            entity.HasOne(d => d.MaTaiKhoanNavigation).WithMany(p => p.SanPhamKhachHangs)
+                .HasForeignKey(d => d.MaTaiKhoan)
+                .HasConstraintName("FK__SanPhamKh__MaTai__46E78A0C");
+        });
+
+        modelBuilder.Entity<TaiKhoan>(entity =>
+        {
+            entity.HasKey(e => e.MaTaiKhoan).HasName("PK__TaiKhoan__AD7C652946046DC5");
+
+            entity.ToTable("TaiKhoan");
+
+            entity.HasIndex(e => e.Username, "UQ__TaiKhoan__536C85E46D7C7386").IsUnique();
+
+            entity.Property(e => e.MaTaiKhoan)
+                .HasMaxLength(10)
+                .IsUnicode(false);
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("password");
-            entity.Property(e => e.UserPower).HasColumnName("user_power");
+                .IsUnicode(false);
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("username");
-        });
-
-        modelBuilder.Entity<CustomerProduct>(entity =>
-        {
-            entity.HasKey(e => new { e.CustomerId, e.ProductId }).HasName("PK__Customer__8915EC5AEBEDB9CB");
-
-            entity.ToTable("Customer_Product");
-
-            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
-            entity.Property(e => e.ProductId).HasColumnName("product_id");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
-
-            entity.HasOne(d => d.Customer).WithMany(p => p.CustomerProducts)
-                .HasForeignKey(d => d.CustomerId)
-                .HasConstraintName("FK__Customer___custo__5165187F");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.CustomerProducts)
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK__Customer___produ__52593CB8");
-        });
-
-        modelBuilder.Entity<Product>(entity =>
-        {
-            entity.HasKey(e => e.ProductId).HasName("PK__Product__47027DF5C3785C2E");
-
-            entity.ToTable("Product");
-
-            entity.Property(e => e.ProductId).HasColumnName("product_id");
-            entity.Property(e => e.Amount).HasColumnName("amount");
-            entity.Property(e => e.ColorId).HasColumnName("color_id");
-            entity.Property(e => e.TypeId).HasColumnName("type_id");
-
-            entity.HasOne(d => d.Color).WithMany(p => p.Products)
-                .HasForeignKey(d => d.ColorId)
-                .HasConstraintName("FK__Product__color_i__4D94879B");
-
-            entity.HasOne(d => d.Type).WithMany(p => p.Products)
-                .HasForeignKey(d => d.TypeId)
-                .HasConstraintName("FK__Product__type_id__4CA06362");
-        });
-
-        modelBuilder.Entity<ProductColor>(entity =>
-        {
-            entity.HasKey(e => e.ColorId).HasName("PK__Product___1143CECB0643E4DA");
-
-            entity.ToTable("Product_Color");
-
-            entity.HasIndex(e => e.Color, "UQ__Product___900DC6E9F1FAD0A5").IsUnique();
-
-            entity.Property(e => e.ColorId).HasColumnName("color_id");
-            entity.Property(e => e.Color)
-                .HasMaxLength(30)
-                .IsUnicode(false)
-                .HasColumnName("color");
-        });
-
-        modelBuilder.Entity<ProductType>(entity =>
-        {
-            entity.HasKey(e => e.TypeId).HasName("PK__Product___2C000598F70CF72F");
-
-            entity.ToTable("Product_Type");
-
-            entity.HasIndex(e => e.ProductType1, "UQ__Product___D1B20C68BE5AC269").IsUnique();
-
-            entity.Property(e => e.TypeId).HasColumnName("type_id");
-            entity.Property(e => e.ProductType1)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("product_type");
+                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);
