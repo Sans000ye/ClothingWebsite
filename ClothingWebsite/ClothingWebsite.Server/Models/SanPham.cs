@@ -13,7 +13,13 @@ public partial class SanPham
 
     public int MaMau { get; set; }
 
+    public int MaSize { get; set; }
+
+    public int MaStyle { get; set; }
+
     public string? HinhAnh { get; set; }
+
+    public int? Gia { get; set; }
 
     public int SoLuong { get; set; }
 

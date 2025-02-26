@@ -36,9 +36,9 @@ namespace ClothingWebsite.Server.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.HasKey("MaLoai")
-                        .HasName("PK__LoaiSanP__730A5759D9B537CE");
+                        .HasName("PK__LoaiSanP__730A57590A1EAD0A");
 
-                    b.HasIndex(new[] { "Loai" }, "UQ__LoaiSanP__4E48BB752EE182DB")
+                    b.HasIndex(new[] { "Loai" }, "UQ__LoaiSanP__4E48BB75B91FC594")
                         .IsUnique();
 
                     b.ToTable("LoaiSanPham", (string)null);
@@ -58,9 +58,9 @@ namespace ClothingWebsite.Server.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("MaMau")
-                        .HasName("PK__MauSanPh__3A5BBB7D4E06701F");
+                        .HasName("PK__MauSanPh__3A5BBB7D1434B5F5");
 
-                    b.HasIndex(new[] { "Mau" }, "UQ__MauSanPh__C7977BC2CD465C8A")
+                    b.HasIndex(new[] { "Mau" }, "UQ__MauSanPh__C7977BC267540E66")
                         .IsUnique();
 
                     b.ToTable("MauSanPham", (string)null);
@@ -73,6 +73,9 @@ namespace ClothingWebsite.Server.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)");
 
+                    b.Property<int?>("Gia")
+                        .HasColumnType("int");
+
                     b.Property<string>("HinhAnh")
                         .HasMaxLength(100)
                         .IsUnicode(false)
@@ -84,6 +87,12 @@ namespace ClothingWebsite.Server.Migrations
                     b.Property<int>("MaMau")
                         .HasColumnType("int");
 
+                    b.Property<int>("MaSize")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaStyle")
+                        .HasColumnType("int");
+
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
 
@@ -93,7 +102,7 @@ namespace ClothingWebsite.Server.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("MaSanPham")
-                        .HasName("PK__SanPham__FAC7442D2F1AAC46");
+                        .HasName("PK__SanPham__FAC7442DFF6F453A");
 
                     b.HasIndex("MaLoai");
 
@@ -118,11 +127,57 @@ namespace ClothingWebsite.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MaTaiKhoan", "MaSanPham")
-                        .HasName("PK__SanPhamK__62D0116B4A0F0C6E");
+                        .HasName("PK__SanPhamK__62D0116B24603860");
 
                     b.HasIndex("MaSanPham");
 
                     b.ToTable("SanPhamKhachHang", (string)null);
+                });
+
+            modelBuilder.Entity("ClothingWebsite.Server.Models.Size", b =>
+                {
+                    b.Property<int>("MaSize")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaSize"));
+
+                    b.Property<string>("Size1")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)")
+                        .HasColumnName("Size");
+
+                    b.HasKey("MaSize")
+                        .HasName("PK__Size__A787E7EDA48E3A87");
+
+                    b.HasIndex(new[] { "Size1" }, "UQ__Size__A3250D06BE91F199")
+                        .IsUnique();
+
+                    b.ToTable("Size", (string)null);
+                });
+
+            modelBuilder.Entity("ClothingWebsite.Server.Models.Style", b =>
+                {
+                    b.Property<int>("MaStyle")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaStyle"));
+
+                    b.Property<string>("Style1")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("Style");
+
+                    b.HasKey("MaStyle")
+                        .HasName("PK__Style__4ED8ED094AF605AE");
+
+                    b.HasIndex(new[] { "Style1" }, "UQ__Style__72289F9592F96805")
+                        .IsUnique();
+
+                    b.ToTable("Style", (string)null);
                 });
 
             modelBuilder.Entity("ClothingWebsite.Server.Models.TaiKhoan", b =>
@@ -148,9 +203,9 @@ namespace ClothingWebsite.Server.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("MaTaiKhoan")
-                        .HasName("PK__TaiKhoan__AD7C652993619B34");
+                        .HasName("PK__TaiKhoan__AD7C65298F5CD87B");
 
-                    b.HasIndex(new[] { "Username" }, "UQ__TaiKhoan__536C85E43C767136")
+                    b.HasIndex(new[] { "Username" }, "UQ__TaiKhoan__536C85E458DB4F16")
                         .IsUnique();
 
                     b.ToTable("TaiKhoan", (string)null);
@@ -163,14 +218,14 @@ namespace ClothingWebsite.Server.Migrations
                         .HasForeignKey("MaLoai")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK__SanPham__MaLoai__4222D4EF");
+                        .HasConstraintName("FK__SanPham__MaLoai__47DBAE45");
 
                     b.HasOne("ClothingWebsite.Server.Models.MauSanPham", "MaMauNavigation")
                         .WithMany("SanPhams")
                         .HasForeignKey("MaMau")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK__SanPham__MaMau__4316F928");
+                        .HasConstraintName("FK__SanPham__MaMau__48CFD27E");
 
                     b.Navigation("MaLoaiNavigation");
 
@@ -184,14 +239,14 @@ namespace ClothingWebsite.Server.Migrations
                         .HasForeignKey("MaSanPham")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK__SanPhamKh__MaSan__47DBAE45");
+                        .HasConstraintName("FK__SanPhamKh__MaSan__4D94879B");
 
                     b.HasOne("ClothingWebsite.Server.Models.TaiKhoan", "MaTaiKhoanNavigation")
                         .WithMany("SanPhamKhachHangs")
                         .HasForeignKey("MaTaiKhoan")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK__SanPhamKh__MaTai__46E78A0C");
+                        .HasConstraintName("FK__SanPhamKh__MaTai__4CA06362");
 
                     b.Navigation("MaSanPhamNavigation");
 
