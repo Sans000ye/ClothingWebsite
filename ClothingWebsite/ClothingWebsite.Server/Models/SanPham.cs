@@ -7,9 +7,13 @@ public partial class SanPham
 {
     public string MaSanPham { get; set; } = null!;
 
+    public string TenSanPham { get; set; } = null!;
+
     public int MaLoai { get; set; }
 
     public int MaMau { get; set; }
+
+    public string? HinhAnh { get; set; }
 
     public int SoLuong { get; set; }
 

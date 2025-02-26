@@ -36,9 +36,9 @@ namespace ClothingWebsite.Server.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.HasKey("MaLoai")
-                        .HasName("PK__LoaiSanP__730A5759C110543F");
+                        .HasName("PK__LoaiSanP__730A5759D9B537CE");
 
-                    b.HasIndex(new[] { "Loai" }, "UQ__LoaiSanP__4E48BB75231FA042")
+                    b.HasIndex(new[] { "Loai" }, "UQ__LoaiSanP__4E48BB752EE182DB")
                         .IsUnique();
 
                     b.ToTable("LoaiSanPham", (string)null);
@@ -55,13 +55,12 @@ namespace ClothingWebsite.Server.Migrations
                     b.Property<string>("Mau")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("MaMau")
-                        .HasName("PK__MauSanPh__3A5BBB7D8523C8FE");
+                        .HasName("PK__MauSanPh__3A5BBB7D4E06701F");
 
-                    b.HasIndex(new[] { "Mau" }, "UQ__MauSanPh__C7977BC2A4AF3D99")
+                    b.HasIndex(new[] { "Mau" }, "UQ__MauSanPh__C7977BC2CD465C8A")
                         .IsUnique();
 
                     b.ToTable("MauSanPham", (string)null);
@@ -74,6 +73,11 @@ namespace ClothingWebsite.Server.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)");
 
+                    b.Property<string>("HinhAnh")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
                     b.Property<int>("MaLoai")
                         .HasColumnType("int");
 
@@ -83,8 +87,13 @@ namespace ClothingWebsite.Server.Migrations
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
 
+                    b.Property<string>("TenSanPham")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.HasKey("MaSanPham")
-                        .HasName("PK__SanPham__FAC7442DA12C8AC9");
+                        .HasName("PK__SanPham__FAC7442D2F1AAC46");
 
                     b.HasIndex("MaLoai");
 
@@ -105,16 +114,11 @@ namespace ClothingWebsite.Server.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)");
 
-                    b.Property<string>("HinhAnh")
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(100)");
-
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
 
                     b.HasKey("MaTaiKhoan", "MaSanPham")
-                        .HasName("PK__SanPhamK__62D0116B4FE28E24");
+                        .HasName("PK__SanPhamK__62D0116B4A0F0C6E");
 
                     b.HasIndex("MaSanPham");
 
@@ -144,9 +148,9 @@ namespace ClothingWebsite.Server.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("MaTaiKhoan")
-                        .HasName("PK__TaiKhoan__AD7C652946046DC5");
+                        .HasName("PK__TaiKhoan__AD7C652993619B34");
 
-                    b.HasIndex(new[] { "Username" }, "UQ__TaiKhoan__536C85E46D7C7386")
+                    b.HasIndex(new[] { "Username" }, "UQ__TaiKhoan__536C85E43C767136")
                         .IsUnique();
 
                     b.ToTable("TaiKhoan", (string)null);

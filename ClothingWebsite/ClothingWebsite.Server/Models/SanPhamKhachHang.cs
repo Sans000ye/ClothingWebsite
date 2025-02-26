@@ -11,8 +11,6 @@ public partial class SanPhamKhachHang
 
     public int SoLuong { get; set; }
 
-    public string? HinhAnh { get; set; }
-
     public virtual SanPham MaSanPhamNavigation { get; set; } = null!;
 
     public virtual TaiKhoan MaTaiKhoanNavigation { get; set; } = null!;

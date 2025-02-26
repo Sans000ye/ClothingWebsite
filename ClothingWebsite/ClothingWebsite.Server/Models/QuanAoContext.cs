@@ -26,17 +26,17 @@ public partial class QuanAoContext : DbContext
     public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=HELPMEIMBLIND\\SQLEXPRESS;Database=QuanAo;Trusted_Connection=True;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Server=HELPMEIMBLIND\\SQLEXPRESS;Database=QuanAo;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<LoaiSanPham>(entity =>
         {
-            entity.HasKey(e => e.MaLoai).HasName("PK__LoaiSanP__730A5759C110543F");
+            entity.HasKey(e => e.MaLoai).HasName("PK__LoaiSanP__730A5759D9B537CE");
 
             entity.ToTable("LoaiSanPham");
 
-            entity.HasIndex(e => e.Loai, "UQ__LoaiSanP__4E48BB75231FA042").IsUnique();
+            entity.HasIndex(e => e.Loai, "UQ__LoaiSanP__4E48BB752EE182DB").IsUnique();
 
             entity.Property(e => e.Loai)
                 .HasMaxLength(20)
@@ -45,26 +45,28 @@ public partial class QuanAoContext : DbContext
 
         modelBuilder.Entity<MauSanPham>(entity =>
         {
-            entity.HasKey(e => e.MaMau).HasName("PK__MauSanPh__3A5BBB7D8523C8FE");
+            entity.HasKey(e => e.MaMau).HasName("PK__MauSanPh__3A5BBB7D4E06701F");
 
             entity.ToTable("MauSanPham");
 
-            entity.HasIndex(e => e.Mau, "UQ__MauSanPh__C7977BC2A4AF3D99").IsUnique();
+            entity.HasIndex(e => e.Mau, "UQ__MauSanPh__C7977BC2CD465C8A").IsUnique();
 
-            entity.Property(e => e.Mau)
-                .HasMaxLength(30)
-                .IsUnicode(false);
+            entity.Property(e => e.Mau).HasMaxLength(30);
         });
 
         modelBuilder.Entity<SanPham>(entity =>
         {
-            entity.HasKey(e => e.MaSanPham).HasName("PK__SanPham__FAC7442DA12C8AC9");
+            entity.HasKey(e => e.MaSanPham).HasName("PK__SanPham__FAC7442D2F1AAC46");
 
             entity.ToTable("SanPham");
 
             entity.Property(e => e.MaSanPham)
                 .HasMaxLength(10)
                 .IsUnicode(false);
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.TenSanPham).HasMaxLength(20);
 
             entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.SanPhams)
                 .HasForeignKey(d => d.MaLoai)
@@ -77,7 +79,7 @@ public partial class QuanAoContext : DbContext
 
         modelBuilder.Entity<SanPhamKhachHang>(entity =>
         {
-            entity.HasKey(e => new { e.MaTaiKhoan, e.MaSanPham }).HasName("PK__SanPhamK__62D0116B4FE28E24");
+            entity.HasKey(e => new { e.MaTaiKhoan, e.MaSanPham }).HasName("PK__SanPhamK__62D0116B4A0F0C6E");
 
             entity.ToTable("SanPhamKhachHang");
 
@@ -86,9 +88,6 @@ public partial class QuanAoContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.MaSanPham)
                 .HasMaxLength(10)
-                .IsUnicode(false);
-            entity.Property(e => e.HinhAnh)
-                .HasMaxLength(100)
                 .IsUnicode(false);
 
             entity.HasOne(d => d.MaSanPhamNavigation).WithMany(p => p.SanPhamKhachHangs)
@@ -102,11 +101,11 @@ public partial class QuanAoContext : DbContext
 
         modelBuilder.Entity<TaiKhoan>(entity =>
         {
-            entity.HasKey(e => e.MaTaiKhoan).HasName("PK__TaiKhoan__AD7C652946046DC5");
+            entity.HasKey(e => e.MaTaiKhoan).HasName("PK__TaiKhoan__AD7C652993619B34");
 
             entity.ToTable("TaiKhoan");
 
-            entity.HasIndex(e => e.Username, "UQ__TaiKhoan__536C85E46D7C7386").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__TaiKhoan__536C85E43C767136").IsUnique();
 
             entity.Property(e => e.MaTaiKhoan)
                 .HasMaxLength(10)

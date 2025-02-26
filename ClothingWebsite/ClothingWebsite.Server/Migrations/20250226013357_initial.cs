@@ -20,7 +20,7 @@ namespace ClothingWebsite.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__LoaiSanP__730A5759C110543F", x => x.MaLoai);
+                    table.PrimaryKey("PK__LoaiSanP__730A5759D9B537CE", x => x.MaLoai);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,11 +29,11 @@ namespace ClothingWebsite.Server.Migrations
                 {
                     MaMau = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Mau = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false)
+                    Mau = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__MauSanPh__3A5BBB7D8523C8FE", x => x.MaMau);
+                    table.PrimaryKey("PK__MauSanPh__3A5BBB7D4E06701F", x => x.MaMau);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,7 +47,7 @@ namespace ClothingWebsite.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__TaiKhoan__AD7C652946046DC5", x => x.MaTaiKhoan);
+                    table.PrimaryKey("PK__TaiKhoan__AD7C652993619B34", x => x.MaTaiKhoan);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,13 +55,15 @@ namespace ClothingWebsite.Server.Migrations
                 columns: table => new
                 {
                     MaSanPham = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    TenSanPham = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     MaLoai = table.Column<int>(type: "int", nullable: false),
                     MaMau = table.Column<int>(type: "int", nullable: false),
+                    HinhAnh = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true),
                     SoLuong = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__SanPham__FAC7442DA12C8AC9", x => x.MaSanPham);
+                    table.PrimaryKey("PK__SanPham__FAC7442D2F1AAC46", x => x.MaSanPham);
                     table.ForeignKey(
                         name: "FK__SanPham__MaLoai__4222D4EF",
                         column: x => x.MaLoai,
@@ -82,12 +84,11 @@ namespace ClothingWebsite.Server.Migrations
                 {
                     MaTaiKhoan = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     MaSanPham = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
-                    SoLuong = table.Column<int>(type: "int", nullable: false),
-                    HinhAnh = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true)
+                    SoLuong = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__SanPhamK__62D0116B4FE28E24", x => new { x.MaTaiKhoan, x.MaSanPham });
+                    table.PrimaryKey("PK__SanPhamK__62D0116B4A0F0C6E", x => new { x.MaTaiKhoan, x.MaSanPham });
                     table.ForeignKey(
                         name: "FK__SanPhamKh__MaSan__47DBAE45",
                         column: x => x.MaSanPham,
@@ -103,13 +104,13 @@ namespace ClothingWebsite.Server.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "UQ__LoaiSanP__4E48BB75231FA042",
+                name: "UQ__LoaiSanP__4E48BB752EE182DB",
                 table: "LoaiSanPham",
                 column: "Loai",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "UQ__MauSanPh__C7977BC2A4AF3D99",
+                name: "UQ__MauSanPh__C7977BC2CD465C8A",
                 table: "MauSanPham",
                 column: "Mau",
                 unique: true);
@@ -130,7 +131,7 @@ namespace ClothingWebsite.Server.Migrations
                 column: "MaSanPham");
 
             migrationBuilder.CreateIndex(
-                name: "UQ__TaiKhoan__536C85E46D7C7386",
+                name: "UQ__TaiKhoan__536C85E43C767136",
                 table: "TaiKhoan",
                 column: "Username",
                 unique: true);
