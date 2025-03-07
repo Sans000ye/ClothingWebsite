@@ -157,3 +157,5 @@ C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\ClothingWebsi
 C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\obj\Debug\net9.0\ClothingWebsite.Server.sourcelink.json
+C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\bin\Debug\net9.0\Mapster.dll
+C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\bin\Debug\net9.0\Mapster.Core.dll

@@ -79,6 +79,16 @@ public partial class QuanAoContext : DbContext
             entity.HasOne(d => d.MaMauNavigation).WithMany(p => p.SanPhams)
                 .HasForeignKey(d => d.MaMau)
                 .HasConstraintName("FK__SanPham__MaMau__48CFD27E");
+
+            entity.HasOne(d => d.MaSizeNavigation).WithMany(p => p.SanPhams)
+                .HasForeignKey(d => d.MaSize)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SanPham_Size");
+
+            entity.HasOne(d => d.MaStyleNavigation).WithMany(p => p.SanPhams)
+                .HasForeignKey(d => d.MaStyle)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__SanPham__MaStyle__7A672E12");
         });
 
         modelBuilder.Entity<SanPhamKhachHang>(entity =>
