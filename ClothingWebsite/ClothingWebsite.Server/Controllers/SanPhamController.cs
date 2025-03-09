@@ -1,4 +1,6 @@
 ﻿using ClothingWebsite.Server.Models;
+using ClothingWebsite.Server.Models.Converter;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +10,17 @@ namespace ClothingWebsite.Server.Controllers
     [ApiController]
     public class SanPhamController : ControllerBase
     {
-        private readonly QuanAoContext QACont;
+        private readonly QuanAoContext db;
         public SanPhamController(QuanAoContext quanAoContext)
         {
-            QACont = quanAoContext;
+            db = quanAoContext;
         }
         [HttpGet]
         public IActionResult LayDSSanPham()
         {
             try
             {
-                var ans = QACont.SanPhams.Select(
+                var ans = db.SanPhams.Select(
                     t => new
                     {
                         MaSanPham = t.MaSanPham,
@@ -39,32 +41,45 @@ namespace ClothingWebsite.Server.Controllers
                 return BadRequest();
             }
         }
-
-        [HttpGet("Id/{Id}")]
-        public IActionResult LaySanPhamId(string Id)
+        [HttpGet("Filter/{Target}")]
+        public IActionResult Filter (string Target, string Target2)
         {
-            try
+            int.TryParse(Target, out int T1);
+            int.TryParse(Target2, out int T2);
+            try 
             {
-                SanPham? sp = QACont.SanPhams.Where(a => a.MaSanPham == Id).FirstOrDefault();
+                IEnumerable<SanPham>sp = db.SanPhams.Where( a => a.MaSizeNavigation.Size1   == Target || 
+                                                                a.MaLoaiNavigation.Loai         == Target ||
+                                                                a.MaStyleNavigation.Style1      == Target ||
+                                                                a.MaMauNavigation.Mau           == Target ||
+                                                                        (T1 >= a.Gia && a.Gia <= T2)        );
                 if (sp is null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    var ans = new
-                    {
-                        MaSanPham = sp.MaSanPham,
-                        TenSanPham = sp.TenSanPham,
-                        Gia = sp.Gia,
-                        SoLuong = sp.SoLuong,
-                        HinhAnh = sp.HinhAnh,
-                        Loai = sp.MaLoaiNavigation?.Loai,
-                        Mau = sp.MaMauNavigation?.Mau,
-                        Style = sp.MaStyleNavigation?.Style1,
-                        Size = sp.MaSizeNavigation?.Size1
-                    };
-                    return Ok(ans);
+                    return Ok(sp);
+                }
+            } 
+            catch { return BadRequest(); }
+        }
+
+        [HttpDelete("Remove/{Id}")]
+        public IActionResult XoaSanPham(string Id)
+        {
+            try
+            {
+                SanPham? sp = db.SanPhams.Where(a => a.MaSanPham == Id).FirstOrDefault();
+                if (sp is null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    db.SanPhams.Remove(sp);
+                    db.SaveChanges();
+                    return Ok();
                 }
             }
             catch
@@ -72,172 +87,20 @@ namespace ClothingWebsite.Server.Controllers
                 return BadRequest();
             }
         }
-
-        [HttpGet("Color/{Color}")]
-        public IActionResult LaySanPhamColor(string Color)
+        [HttpPost]
+        public IActionResult ThemSanPham([FromBody] CSanPham value)
         {
             try
             {
-                SanPham? sp = QACont.SanPhams.Where(a => a.MaMauNavigation.Mau == Color).FirstOrDefault();
-                if (sp is null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    var ans = new
-                    {
-                        MaSanPham = sp.MaSanPham,
-                        TenSanPham = sp.TenSanPham,
-                        Gia = sp.Gia,
-                        SoLuong = sp.SoLuong,
-                        HinhAnh = sp.HinhAnh,
-                        Loai = sp.MaLoaiNavigation?.Loai,
-                        Mau = sp.MaMauNavigation?.Mau,
-                        Style = sp.MaStyleNavigation?.Style1,
-                        Size = sp.MaSizeNavigation?.Size1
-                    };
-                    return Ok(ans);
-                }
+                var obj = value.Adapt<SanPham>();
+                db.SanPhams.Add(obj);
+                db.SaveChanges();
+                return Ok();
             }
             catch
             {
                 return BadRequest();
             }
         }
-
-        [HttpGet("Style/{Style}")]
-        public IActionResult LaySanPhamStyle(string Style)
-        {
-            try
-            {
-                SanPham? sp = QACont.SanPhams.Where(a => a.MaStyleNavigation.Style1 == Style).FirstOrDefault();
-                if (sp is null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    var ans = new
-                    {
-                        MaSanPham = sp.MaSanPham,
-                        TenSanPham = sp.TenSanPham,
-                        Gia = sp.Gia,
-                        SoLuong = sp.SoLuong,
-                        HinhAnh = sp.HinhAnh,
-                        Loai = sp.MaLoaiNavigation?.Loai,
-                        Mau = sp.MaMauNavigation?.Mau,
-                        Style = sp.MaStyleNavigation?.Style1,
-                        Size = sp.MaSizeNavigation?.Size1
-                    };
-                    return Ok(ans);
-                }
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("Size/{Size}")]
-        public IActionResult LaySanPhamSize(string Size)
-        {
-            try
-            {
-                SanPham? sp = QACont.SanPhams.Where(a => a.MaSizeNavigation.Size1 == Size).FirstOrDefault();
-                if (sp is null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    var ans = new
-                    {
-                        MaSanPham = sp.MaSanPham,
-                        TenSanPham = sp.TenSanPham,
-                        Gia = sp.Gia,
-                        SoLuong = sp.SoLuong,
-                        HinhAnh = sp.HinhAnh,
-                        Loai = sp.MaLoaiNavigation?.Loai,
-                        Mau = sp.MaMauNavigation?.Mau,
-                        Style = sp.MaStyleNavigation?.Style1,
-                        Size = sp.MaSizeNavigation?.Size1
-                    };
-                    return Ok(ans);
-                }
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("PriceRange")]
-        public IActionResult LaySanPhamGia(int MonMin,int MonMax)
-        {
-            try
-            {
-                SanPham? sp = QACont.SanPhams.Where(a => a.Gia >= MonMin && a.Gia <= MonMax).FirstOrDefault();
-                if (sp is null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    var ans = new
-                    {
-                        MaSanPham = sp.MaSanPham,
-                        TenSanPham = sp.TenSanPham,
-                        Gia = sp.Gia,
-                        SoLuong = sp.SoLuong,
-                        HinhAnh = sp.HinhAnh,
-                        Loai = sp.MaLoaiNavigation?.Loai,
-                        Mau = sp.MaMauNavigation?.Mau,
-                        Style = sp.MaStyleNavigation?.Style1,
-                        Size = sp.MaSizeNavigation?.Size1
-                    };
-                    return Ok(ans);
-                }
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("Type/{loai}")]
-        public IActionResult LaySanPhamLoai(string Loai)
-        {
-            try
-            {
-                SanPham? sp = QACont.SanPhams.Where(a => a.MaLoaiNavigation.Loai == Loai).FirstOrDefault();
-                if (sp is null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    var ans = new
-                    {
-                        MaSanPham = sp.MaSanPham,
-                        TenSanPham = sp.TenSanPham,
-                        Gia = sp.Gia,
-                        SoLuong = sp.SoLuong,
-                        HinhAnh = sp.HinhAnh,
-                        Loai = sp.MaLoaiNavigation?.Loai,
-                        Mau = sp.MaMauNavigation?.Mau,
-                        Style = sp.MaStyleNavigation?.Style1,
-                        Size = sp.MaSizeNavigation?.Size1
-                    };
-                    return Ok(ans);
-                }
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        
     }
 }
