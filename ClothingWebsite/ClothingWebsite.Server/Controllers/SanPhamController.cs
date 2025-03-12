@@ -41,28 +41,43 @@ namespace ClothingWebsite.Server.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("Filter/{Target}")]
-        public IActionResult Filter (string Target, string Target2)
+        [HttpGet("Filter/{Target}/{Target2}")]
+        public IActionResult Filter(string Target, string Target2)
         {
             int.TryParse(Target, out int T1);
             int.TryParse(Target2, out int T2);
-            try 
+            try
             {
-                IEnumerable<SanPham>sp = db.SanPhams.Where( a => a.MaSizeNavigation.Size1   == Target || 
-                                                                a.MaLoaiNavigation.Loai         == Target ||
-                                                                a.MaStyleNavigation.Style1      == Target ||
-                                                                a.MaMauNavigation.Mau           == Target ||
-                                                                        (T1 >= a.Gia && a.Gia <= T2)        );
-                if (sp is null)
+                var sp = db.SanPhams.AsQueryable();
+
+                if (!string.IsNullOrEmpty(Target))
+                {
+                    sp = sp.Where(a => a.MaSizeNavigation.Size1 == Target ||
+                                       a.MaLoaiNavigation.Loai == Target ||
+                                       a.MaStyleNavigation.Style1 == Target ||
+                                       a.MaMauNavigation.Mau == Target);
+                }
+
+                if (T1 > 0 && T2 > 0)
+                {
+                    sp = sp.Where(a => a.Gia >= T1 && a.Gia <= T2);
+                }
+
+                var result = sp.ToList();
+
+                if (result == null || !result.Any())
                 {
                     return NotFound();
                 }
                 else
                 {
-                    return Ok(sp);
+                    return Ok(result);
                 }
-            } 
-            catch { return BadRequest(); }
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete("Remove/{Id}")]
