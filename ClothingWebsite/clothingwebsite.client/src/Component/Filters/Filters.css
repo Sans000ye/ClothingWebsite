@@ -14,50 +14,38 @@
 }
 h1{
     color: black;
+    font-family: Satoshi;
+    font-weight: 700;
+    font-size: 20px;        
 }
-.btnColor {
+.btn-btnColor {
     border-radius: 100%;
+    width: 37px;
+    height: 37px;
     border: 10px solid currentColor+100;
     padding: 10px;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
     background-color: #1a1a1a;
+    margin: 7px;
     cursor: pointer;
     transition: border-color 0.25s;
 }
-#C1 {
-    background: #F50606;
-}
-#C2 {
-    background: #00C12B;
-}
-#C3 {
-    background: #F57906;
-}
-#C4 {
-    background: #06CAF5;
-}
-#C5 {
-    background: #063AF5;
-}
-#C6 {
-    background: #F506A4;
-}
-#C7 {
-    background: #7D06F5;
-}
-#C8 {
-    background: white;
-}
-#C9 {
-    background: black;
-}
-#C10 {
-    background: #F5DD06;
-}
+
+#C1 {background: #F50606;  border: 2px solid rgba(0,0,0, 0.25);}
+#C2 {background: #00C12B;  border: 2px solid rgba(0,0,0, 0.25);}
+#C3 {background: #F57906;  border: 2px solid rgba(0,0,0, 0.25);}
+#C4 {background: #06CAF5;  border: 2px solid rgba(0,0,0, 0.25);}
+#C5 {background: #063AF5;  border: 2px solid rgba(0,0,0, 0.25);}
+#C6 {background: #F506A4;  border: 2px solid rgba(0,0,0, 0.25);}
+#C7 {background: #7D06F5;  border: 2px solid rgba(0,0,0, 0.25);}
+#C8 {background: white;    border: 2px solid rgba(0,0,0, 0.25);}
+#C9 {background: black;    border: 2px solid rgba(0,0,0, 0.25);}
+#C10 {background: #F5DD06; border: 2px solid rgba(0,0,0, 0.25);}
 
 .btnType{    
+    text-decoration: none;
     width: auto;
     font-size: 16px;
     font-weight: 400;
@@ -69,14 +57,26 @@ h1{
     text-align: left;
     transition: opacity 0.25s;
 }
-.liType{
+.liType{width: 100%;}
+.btnType:hover{opacity: 100%;}
+.btn-btnSize{    
+    width: auto;
+    margin: 7px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: inherit;
+    background-color: #F0F0F0;
+    color: black;
+    opacity: 60%;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.25s;}
+.btn-btnSize:focus{animation: BtnSelected 0.25s;animation-fill-mode: forwards;}
+@keyframes BtnSelected {from {background-color:#F0F0F0; color: black;opacity: 60%;}to{background-color:black;color:white;opacity: 100%;}}
+.btnStyle{
+    text-decoration: none;
     width: 100%;
-}
-.btnType:hover{
-    opacity: 100%;
-}
-.btnSize{    
-    width: auto;
     font-size: 16px;
     font-weight: 400;
     font-family: inherit;
@@ -87,15 +87,6 @@ h1{
     text-align: left;
     transition: opacity 0.25s;
 }
-.btnStyle{    
-    width: auto;
-    font-size: 16px;
-    font-weight: 400;
-    font-family: inherit;
-    background-color: #FFFFFF ;
-    color: black;
-    opacity: 60%;
-    cursor: pointer;
-    text-align: left;
-    transition: opacity 0.25s;
+.Filter-icon{
+    float: right;
 }
