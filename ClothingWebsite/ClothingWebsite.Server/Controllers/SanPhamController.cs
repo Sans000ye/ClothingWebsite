@@ -3,18 +3,15 @@ using ClothingWebsite.Server.Models.Converter;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClothingWebsite.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SanPhamController : ControllerBase
+    public class SanPhamController(QuanAoContext db) : ControllerBase
     {
-        private readonly QuanAoContext db;
-        public SanPhamController(QuanAoContext quanAoContext)
-        {
-            db = quanAoContext;
-        }
+        private readonly QuanAoContext _db = db;
         [HttpGet]
         public IActionResult LayDSSanPham()
         {
@@ -23,17 +20,17 @@ namespace ClothingWebsite.Server.Controllers
                 var ans = db.SanPhams.Select(
                     t => new
                     {
-                        MaSanPham = t.MaSanPham,
-                        TenSanPham = t.TenSanPham,
-                        Gia = t.Gia,
-                        SoLuong = t.SoLuong,
-                        HinhAnh = t.HinhAnh,
-                        Loai = t.MaLoaiNavigation.Loai,
-                        Mau = t.MaMauNavigation.Mau,
-                        Style = t.MaStyleNavigation.Style1,
-                        Size = t.MaSizeNavigation.Size1
+                        t.MaSanPham,
+                        t.TenSanPham,
+                        t.Gia,
+                        t.SoLuong,
+                        t.HinhAnh,
+                        t.MaLoaiNavigation.Loai,
+                        t.MaMauNavigation.Mau,
+                        t.MaStyleNavigation.Style1,
+                        t.MaSizeNavigation.Size1
                     }
-                    ).ToList();
+                ).ToList();
                 return Ok(ans);
             }
             catch
@@ -41,29 +38,94 @@ namespace ClothingWebsite.Server.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("Filter/{Target}/{Target2}")]
-        public IActionResult Filter(string Target, string Target2)
+
+        [HttpGet]
+        public ActionResult<IEnumerable<SanPham>> GetSanPhams(
+            [FromQuery] string style,
+            [FromQuery] string size,
+            [FromQuery] string loai,
+            [FromQuery] string mau,
+            [FromQuery] decimal? minPrice,
+            [FromQuery] decimal? maxPrice)
         {
-            int.TryParse(Target, out int T1);
-            int.TryParse(Target2, out int T2);
+            var query = db.SanPhams.AsQueryable();
+            if (!string.IsNullOrEmpty(style))
+            {
+                query = query.Where(p => p.MaStyleNavigation.Style1 == style);
+            }
+            if (!string.IsNullOrEmpty(size))
+            {
+                query = query.Where(p => p.MaSizeNavigation.Size1 == size);
+            }
+            if (!string.IsNullOrEmpty(loai))
+            {
+                query = query.Where(p => p.MaLoaiNavigation.Loai == loai);
+            }
+            if (!string.IsNullOrEmpty(mau))
+            {
+                query = query.Where(p => p.MaMauNavigation.Mau == mau);
+            }
+            if (minPrice.HasValue)
+            {
+                query = query.Where(p => p.Gia >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                query = query.Where(p => p.Gia <= maxPrice.Value);
+            }
+
+            // Execute the query and return the results
+            var filteredProducts = query.ToList();
+            return Ok(filteredProducts);
+        }
+
+        [HttpPost("ApplyFilters")]
+        public IActionResult ApplyFilters([FromBody] FilterCriteria filterCriteria)
+        {
             try
             {
                 var sp = db.SanPhams.AsQueryable();
 
-                if (!string.IsNullOrEmpty(Target))
+                // Apply filters based on the criteria
+                if (!string.IsNullOrEmpty(filterCriteria.Style))
                 {
-                    sp = sp.Where(a => a.MaSizeNavigation.Size1 == Target ||
-                                       a.MaLoaiNavigation.Loai == Target ||
-                                       a.MaStyleNavigation.Style1 == Target ||
-                                       a.MaMauNavigation.Mau == Target);
+                    sp = sp.Where(a => a.MaStyleNavigation.Style1 == filterCriteria.Style);
                 }
 
-                if (T1 > 0 && T2 > 0)
+                if (!string.IsNullOrEmpty(filterCriteria.Size))
                 {
-                    sp = sp.Where(a => a.Gia >= T1 && a.Gia <= T2);
+                    sp = sp.Where(a => a.MaSizeNavigation.Size1 == filterCriteria.Size);
                 }
 
-                var result = sp.ToList();
+                if (!string.IsNullOrEmpty(filterCriteria.Type))
+                {
+                    sp = sp.Where(a => a.MaLoaiNavigation.Loai == filterCriteria.Type);
+                }
+
+                if (!string.IsNullOrEmpty(filterCriteria.Color))
+                {
+                    sp = sp.Where(a => a.MaMauNavigation.Mau == filterCriteria.Color);
+                }
+
+                if (filterCriteria.PriceRange != null && filterCriteria.PriceRange.Length == 2)
+                {
+                    int minPrice = filterCriteria.PriceRange[0];
+                    int maxPrice = filterCriteria.PriceRange[1];
+                    sp = sp.Where(a => a.Gia >= minPrice && a.Gia <= maxPrice);
+                }
+
+                var result = sp.Select(t => new
+                {
+                    t.MaSanPham,
+                    t.TenSanPham,
+                    t.Gia,
+                    t.SoLuong,
+                    t.HinhAnh,
+                    t.MaLoaiNavigation.Loai,
+                    t.MaMauNavigation.Mau,
+                    t.MaStyleNavigation.Style1,
+                    t.MaSizeNavigation.Size1
+                }).ToList();
 
                 if (result == null || !result.Any())
                 {
@@ -74,8 +136,10 @@ namespace ClothingWebsite.Server.Controllers
                     return Ok(result);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                // Log the exception (optional)
+                Console.WriteLine(ex.Message);
                 return BadRequest();
             }
         }
@@ -102,6 +166,7 @@ namespace ClothingWebsite.Server.Controllers
                 return BadRequest();
             }
         }
+
         [HttpPost]
         public IActionResult ThemSanPham([FromBody] CSanPham value)
         {

@@ -1,10 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400px;0,500;0,700;0,900;1,100;1,300;1,400px;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400px;0,500;0,600;0,700;0,800;1,300;1,400px;1,500;1,600;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400px;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400px;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400px;0,700;0,900;1,100;1,300;1,400px;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400px;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400px;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 295px;
     margin: 0;
     padding: 0;    
     box-sizing: border-box;
@@ -14,7 +19,7 @@
 }
 h1{
     color: black;
-    font-family: Satoshi;
+    font-family: inherit;
     font-weight: 700;
     font-size: 20px;        
 }
@@ -34,21 +39,31 @@ h1{
 }
 
 #C1 {background: #F50606;  border: 2px solid rgba(0,0,0, 0.25);}
+#C1.selected { border: 2px solid black;}
 #C2 {background: #00C12B;  border: 2px solid rgba(0,0,0, 0.25);}
+#C2.selected { border: 2px solid black;}
 #C3 {background: #F57906;  border: 2px solid rgba(0,0,0, 0.25);}
+#C3.selected { border: 2px solid black;}
 #C4 {background: #06CAF5;  border: 2px solid rgba(0,0,0, 0.25);}
+#C4.selected { border: 2px solid black;}
 #C5 {background: #063AF5;  border: 2px solid rgba(0,0,0, 0.25);}
+#C5.selected { border: 2px solid black;}
 #C6 {background: #F506A4;  border: 2px solid rgba(0,0,0, 0.25);}
+#C6.selected { border: 2px solid black;}
 #C7 {background: #7D06F5;  border: 2px solid rgba(0,0,0, 0.25);}
+#C7.selected { border: 2px solid black;}
 #C8 {background: white;    border: 2px solid rgba(0,0,0, 0.25);}
+#C8.selected { border: 2px solid black;}
 #C9 {background: black;    border: 2px solid rgba(0,0,0, 0.25);}
+#C9.selected { border: 2px solid white;}
 #C10 {background: #F5DD06; border: 2px solid rgba(0,0,0, 0.25);}
+#C10.selected { border: 2px solid black;}
 
 .btnType{    
     text-decoration: none;
     width: auto;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 400px;
     font-family: inherit;
     background-color: #FFFFFF ;
     color: black;
@@ -64,7 +79,7 @@ h1{
     margin: 7px;
     border-radius: 100px;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 400px;
     font-family: inherit;
     background-color: #F0F0F0;
     color: black;
@@ -72,13 +87,13 @@ h1{
     cursor: pointer;
     text-align: left;
     transition: opacity 0.25s;}
-.btn-btnSize:focus{animation: BtnSelected 0.25s;animation-fill-mode: forwards;}
+.btn-btnSize.selected{animation: BtnSelected 0.25s;animation-fill-mode: forwards;}
 @keyframes BtnSelected {from {background-color:#F0F0F0; color: black;opacity: 60%;}to{background-color:black;color:white;opacity: 100%;}}
 .btnStyle{
     text-decoration: none;
     width: 100%;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 400px;
     font-family: inherit;
     background-color: #FFFFFF ;
     color: black;
@@ -87,6 +102,48 @@ h1{
     text-align: left;
     transition: opacity 0.25s;
 }
-.Filter-icon{
-    float: right;
+.list-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
+
+.Filter-icon{    
+    float: right;
+    right: 0px;
+    width: 11.5px;
+}
+.Filter-icon-header{
+    float: right;
+    right: 0px;
+    width: 20.25px;
+    height: 18.75px;
+    color: #00000066;
+    opacity: 100%;
+    ;
+}
+.Apply{
+    height: 48px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 400px;
+    font-family: inherit;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.25s;
+}
+.btnType.selected, .btn-btnSize.selected {
+    color: black;
+    opacity: 100%;
+}
+.btnStyle.selected {
+
+    color: black;
+    opacity: 100%;
+}
+
