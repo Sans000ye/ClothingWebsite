@@ -4861,11 +4861,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
+      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
       "projectName": "ClothingWebsite.Server",
-      "projectPath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
+      "projectPath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
       "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\obj\\",
+      "outputPath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

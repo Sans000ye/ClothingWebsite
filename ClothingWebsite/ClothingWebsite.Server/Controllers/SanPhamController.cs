@@ -7,17 +7,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClothingWebsite.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class SanPhamController(QuanAoContext db) : ControllerBase
+    [Route("api/[controller]")]
+    public class SanPhamController : ControllerBase
     {
-        private readonly QuanAoContext _db = db;
-        [HttpGet]
+        private readonly QuanAoContext _db;
+
+        public SanPhamController(QuanAoContext db)
+        {
+            _db = db;
+        }
+
+        // Route: api/SanPham/LayDSSanPham
+        [HttpGet("LayDSSanPham")]
         public IActionResult LayDSSanPham()
         {
             try
             {
-                var ans = db.SanPhams.Select(
+                var ans = _db.SanPhams.Select(
                     t => new
                     {
                         t.MaSanPham,
@@ -39,16 +46,17 @@ namespace ClothingWebsite.Server.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<SanPham>> GetSanPhams(
+        // Route: api/SanPham/GetSanPhams
+        [HttpGet("GetSanPhams")]
+        public IActionResult GetSanPhams(
             [FromQuery] string style,
             [FromQuery] string size,
-            [FromQuery] string loai,
-            [FromQuery] string mau,
+            [FromQuery] string mau, // Matches 'mau' from the frontend
             [FromQuery] decimal? minPrice,
             [FromQuery] decimal? maxPrice)
         {
-            var query = db.SanPhams.AsQueryable();
+            var query = _db.SanPhams.AsQueryable();
+
             if (!string.IsNullOrEmpty(style))
             {
                 query = query.Where(p => p.MaStyleNavigation.Style1 == style);
@@ -56,10 +64,6 @@ namespace ClothingWebsite.Server.Controllers
             if (!string.IsNullOrEmpty(size))
             {
                 query = query.Where(p => p.MaSizeNavigation.Size1 == size);
-            }
-            if (!string.IsNullOrEmpty(loai))
-            {
-                query = query.Where(p => p.MaLoaiNavigation.Loai == loai);
             }
             if (!string.IsNullOrEmpty(mau))
             {
@@ -74,19 +78,18 @@ namespace ClothingWebsite.Server.Controllers
                 query = query.Where(p => p.Gia <= maxPrice.Value);
             }
 
-            // Execute the query and return the results
             var filteredProducts = query.ToList();
             return Ok(filteredProducts);
         }
 
+        // Route: api/SanPham/ApplyFilters
         [HttpPost("ApplyFilters")]
         public IActionResult ApplyFilters([FromBody] FilterCriteria filterCriteria)
         {
             try
             {
-                var sp = db.SanPhams.AsQueryable();
+                var sp = _db.SanPhams.AsQueryable();
 
-                // Apply filters based on the criteria
                 if (!string.IsNullOrEmpty(filterCriteria.Style))
                 {
                     sp = sp.Where(a => a.MaStyleNavigation.Style1 == filterCriteria.Style);
@@ -138,7 +141,6 @@ namespace ClothingWebsite.Server.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception (optional)
                 Console.WriteLine(ex.Message);
                 return BadRequest();
             }
@@ -149,15 +151,15 @@ namespace ClothingWebsite.Server.Controllers
         {
             try
             {
-                SanPham? sp = db.SanPhams.Where(a => a.MaSanPham == Id).FirstOrDefault();
+                SanPham? sp = _db.SanPhams.Where(a => a.MaSanPham == Id).FirstOrDefault();
                 if (sp is null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    db.SanPhams.Remove(sp);
-                    db.SaveChanges();
+                    _db.SanPhams.Remove(sp);
+                    _db.SaveChanges();
                     return Ok();
                 }
             }
@@ -173,8 +175,8 @@ namespace ClothingWebsite.Server.Controllers
             try
             {
                 var obj = value.Adapt<SanPham>();
-                db.SanPhams.Add(obj);
-                db.SaveChanges();
+                _db.SanPhams.Add(obj);
+                _db.SaveChanges();
                 return Ok();
             }
             catch

@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "MvkCXQLwqIVOa9LtMgTMk2sIy5b2CEVAqm/rCBUzsTQ=",
+  "Hash": "8THyhpRoP7G5Y+RFjIlx21Sih9lfJ/cEIBbMDoPrEQU=",
   "Source": "ClothingWebsite.Server",
   "BasePath": "_content/ClothingWebsite.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\ClothingWebsite\\clothingwebsite.client\\clothingwebsite.client.esproj",
+      "Identity": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\clothingwebsite.client\\clothingwebsite.client.esproj",
       "Version": 2,
       "Source": "clothingwebsite.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
