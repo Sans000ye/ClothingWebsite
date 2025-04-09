@@ -28,7 +28,16 @@ function Header() {
               </li>
               <li><a href="/sale">On Sale</a></li>
               <li><a href="/new-arrivals">New Arrivals</a></li>
-              <li><a href="/brands">Brands</a></li>
+              <li className="dropdown1">
+                <a href="/brands">Brands ▾</a>
+                <ul className="dropdown-menu1">
+                  <li><a href="/me1">VERSACE</a></li>
+                  <li><a href="/me2">ZARA</a></li>
+                  <li><a href="/me2">GUCCI</a></li>
+                  <li><a href="/me2">PRADA</a></li>
+                  <li><a href="/me2">Calvin Klein</a></li>
+                </ul>
+              </li>
             </ul>
             <div className="search-bar">
               <FaSearch className="search-icon" />
@@ -38,7 +47,7 @@ function Header() {
                 <Link to = "/cart">
                   <FaShoppingCart className="icon" />
                 </Link>
-                <Link to = "/about">
+                <Link to = "/login">
                   <FaUser className="icon" />
                 </Link>
             </div>

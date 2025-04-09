@@ -3,7 +3,7 @@ import MainLayout from "./layout/MainLayout";
 import Home from "./Pages/Home";
 // import About from "./Pages/About";
 // import Contact from "./Pages/Contact";
-// import Login_Signup from "./components/LoginSignup/LoginSignup";
+// import LoginSignup from "./components/LoginSignup/LoginSignup";
 import Cart from "./components/Cart/Cart";
 import Casual from "./components/Casual/Casual";
 import Formal from "./components/Formal/Formal";
@@ -23,7 +23,7 @@ function App() {
           <Route path="/gym" element={<Gym />} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="/new-arrivals" element={<NewArrivals/>} />
-          {/* <Route path="contact" element={<Contact/>}/> */}
+          {/* <Route path="/login" element={<LoginSignup/>}/> */}
         </Route>
       </Routes>
     </BrowserRouter>

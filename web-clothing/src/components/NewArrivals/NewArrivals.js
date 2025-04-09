@@ -5,14 +5,14 @@ import { API_BASE } from "../../config";
 
 const products = [
   createProduct(1, `${API_BASE}/images/black-striped.png`, "T-shirt with Tape Details", 4.5, 120),
-  createProduct(2, `${API_BASE}/images/skinny-fit-jeans.png`, "Skinny Fit Jeans", 3.5, 240, 260, "-20%"),
-  createProduct(3, "/img/clother/atst747-2v.png", "Checkered Shirt", 4.5, 180),
-  createProduct(4, "/img/clother/tshirt.jpg", "Sleeve Striped T-shirt", 4.5, 130, 160, "-30%"),
-  createProduct(5, "/images/product5.jpg", "Product 5", 4.0, 150),
-  createProduct(6, "/img/clother/tshirt.jpg", "Product 6", 4.2, 200, 250, "-20%"),
-  createProduct(7, "/img/clother/tshirt.jpg", "Product 7", 4.2, 200, 250, "-20%"),
-  createProduct(8, "/img/Banner.png", "Product 8", 4.2, 200, 250, "-20%"),
-  createProduct(9, "/img/Banner.png", "Product 8", 4.2, 200, 250, "-20%"),
+  createProduct(2, `${API_BASE}/images/skinny-jeans.png`, "Skinny Fit Jeans", 3.5, 240, 260, "-20%"),
+  createProduct(3, `${API_BASE}/images/checkered-shirt.png`, "Checkered Shirt", 4.5, 180),
+  createProduct(4, `${API_BASE}/images/sleeve-striped.png`, "Sleeve Striped T-shirt", 4.5, 130, 160, "-30%"),
+  createProduct(5, `${API_BASE}/images/checkered-shirt.png`, "Product 5", 4.0, 150),
+  createProduct(6, `${API_BASE}/images/checkered-shirt.png`, "Product 6", 4.2, 200, 250, "-20%"),
+  createProduct(7, `${API_BASE}/images/checkered-shirt.png`, "Product 7", 4.2, 200, 250, "-20%"),
+  createProduct(8, `${API_BASE}/images/checkered-shirt.png`, "Product 8", 4.2, 200, 250, "-20%"),
+  createProduct(9, `${API_BASE}/images/checkered-shirt.png`, "Product 8", 4.2, 200, 250, "-20%"),
 
 ];
 

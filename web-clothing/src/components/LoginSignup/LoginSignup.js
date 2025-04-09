@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Login_Signup.css";
+import "./LoginSignup.css";
 
-const Login_Signup = () => {
+function LoginSignup () {
   const [isSignup, setIsSignup] = useState(false);
 
   const toggleAuthMode = () => {
@@ -27,4 +27,4 @@ const Login_Signup = () => {
   );
 };
 
-export default Login_Signup;
+export default LoginSignup;
