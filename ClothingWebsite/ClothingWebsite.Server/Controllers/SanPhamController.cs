@@ -49,37 +49,58 @@ namespace ClothingWebsite.Server.Controllers
         // Route: api/SanPham/GetSanPhams
         [HttpGet("GetSanPhams")]
         public IActionResult GetSanPhams(
-            [FromQuery] string style,
-            [FromQuery] string size,
-            [FromQuery] string mau, // Matches 'mau' from the frontend
-            [FromQuery] decimal? minPrice,
-            [FromQuery] decimal? maxPrice)
+            [FromQuery] string? style = null, // Make parameters optional
+            [FromQuery] string? size = null,
+            [FromQuery] string? mau = null,
+            [FromQuery] decimal? minPrice = null,
+            [FromQuery] decimal? maxPrice = null)
         {
-            var query = _db.SanPhams.AsQueryable();
+            try
+            {
+                var query = _db.SanPhams.AsQueryable();
 
-            if (!string.IsNullOrEmpty(style))
-            {
-                query = query.Where(p => p.MaStyleNavigation.Style1 == style);
-            }
-            if (!string.IsNullOrEmpty(size))
-            {
-                query = query.Where(p => p.MaSizeNavigation.Size1 == size);
-            }
-            if (!string.IsNullOrEmpty(mau))
-            {
-                query = query.Where(p => p.MaMauNavigation.Mau == mau);
-            }
-            if (minPrice.HasValue)
-            {
-                query = query.Where(p => p.Gia >= minPrice.Value);
-            }
-            if (maxPrice.HasValue)
-            {
-                query = query.Where(p => p.Gia <= maxPrice.Value);
-            }
+                // Apply filters only if the parameter is not null or empty
+                if (!string.IsNullOrEmpty(style))
+                {
+                    query = query.Where(p => p.MaStyleNavigation.Style1 == style);
+                }
+                if (!string.IsNullOrEmpty(size))
+                {
+                    query = query.Where(p => p.MaSizeNavigation.Size1 == size);
+                }
+                if (!string.IsNullOrEmpty(mau))
+                {
+                    query = query.Where(p => p.MaMauNavigation.Mau == mau);
+                }
+                if (minPrice.HasValue)
+                {
+                    query = query.Where(p => p.Gia >= minPrice.Value);
+                }
+                if (maxPrice.HasValue)
+                {
+                    query = query.Where(p => p.Gia <= maxPrice.Value);
+                }
 
-            var filteredProducts = query.ToList();
-            return Ok(filteredProducts);
+                var filteredProducts = query.Select(t => new
+                {
+                    t.MaSanPham,
+                    t.TenSanPham,
+                    t.Gia,
+                    t.SoLuong,
+                    t.HinhAnh,
+                    t.MaLoaiNavigation.Loai,
+                    t.MaMauNavigation.Mau,
+                    t.MaStyleNavigation.Style1,
+                    t.MaSizeNavigation.Size1
+                }).ToList();
+
+                return Ok(filteredProducts);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // Route: api/SanPham/ApplyFilters
