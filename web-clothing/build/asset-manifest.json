@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4f5bd76d.css",
+    "main.js": "/static/js/main.c77acd96.js",
+    "static/js/453.4e86236a.chunk.js": "/static/js/453.4e86236a.chunk.js",
+    "static/media/Banner web-clothing.png": "/static/media/Banner web-clothing.7f2c0cebd728f709ab06.png",
+    "index.html": "/index.html",
+    "main.4f5bd76d.css.map": "/static/css/main.4f5bd76d.css.map",
+    "main.c77acd96.js.map": "/static/js/main.c77acd96.js.map",
+    "453.4e86236a.chunk.js.map": "/static/js/453.4e86236a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4f5bd76d.css",
+    "static/js/main.c77acd96.js"
+  ]
+}
