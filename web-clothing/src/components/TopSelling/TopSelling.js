@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import "./TopSelling.css";
 import { createProduct } from "../../Helper/productHelper";
-import { API_BASE } from "../../config";
+
 
 const topSellingProducts = [
-  createProduct(1, `${API_BASE}/images/black-striped.png`, "Classic Leather Jacket", 4.7, 300),
-  createProduct(2, `${API_BASE}/images/black-striped.png`, "High-Waist Trousers", 4.3, 120, 150, "-20%"),
-  createProduct(3, `${API_BASE}/images/black-striped.png`, "Casual Sneakers", 4.6, 90),
-  createProduct(4, `${API_BASE}/images/black-striped.png`, "Elegant Blouse", 4.5, 80, 100, "-20%"),
-  createProduct(5, `${API_BASE}/images/black-striped.png`, "Sporty Hoodie", 4.4, 70),
-  createProduct(6, `${API_BASE}/images/black-striped.png`, "Designer Handbag", 4.8, 250, 300, "-16%"),
-  createProduct(7, `${API_BASE}/images/black-striped.png`, "Designer Handbag", 4.8, 250, 300, "-16%"),
-  createProduct(8, `${API_BASE}/images/black-striped.png`, "Designer Handbag", 4.8, 250, 300, "-16%"),
+  createProduct(1, "/images/top1.jpg", "Classic Leather Jacket", 4.7, 300),
+  createProduct(2, "/images/top2.jpg", "High-Waist Trousers", 4.3, 120, 150, "-20%"),
+  createProduct(3, "/images/top3.jpg", "Casual Sneakers", 4.6, 90),
+  createProduct(4, "/images/top4.jpg", "Elegant Blouse", 4.5, 80, 100, "-20%"),
+  createProduct(5, "/images/top5.jpg", "Sporty Hoodie", 4.4, 70),
+  createProduct(6, "/images/top6.jpg", "Designer Handbag", 4.8, 250, 300, "-16%"),
+  createProduct(7, "/img/clother/tshirt.jpg", "Designer Handbag", 4.8, 250, 300, "-16%"),
+  createProduct(8, "/img/Banner.png", "Designer Handbag", 4.8, 250, 300, "-16%"),
 
 ];
 

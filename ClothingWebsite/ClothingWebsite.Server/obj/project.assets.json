@@ -100,7 +100,7 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Microsoft.AspNetCore.SpaProxy/9.0.4": {
+      "Microsoft.AspNetCore.SpaProxy/9.0.3": {
         "type": "package",
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.SpaProxy.dll": {}
@@ -1770,10 +1770,10 @@
         "microsoft.aspnetcore.openapi.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.SpaProxy/9.0.4": {
-      "sha512": "HOgobccKyqnbpliwlsgz9B7OP4vpqmTIMJM0Zc2t6XrYJV4MD0+4T+Yrs6muia5cXPXy2jsO/SjWoqqT1/mf8g==",
+    "Microsoft.AspNetCore.SpaProxy/9.0.3": {
+      "sha512": "iErynM2aBLYMprxUv8HB+9zFWzXQN7ETSKEEaPN75Xmig7lcYT/97NULu3jI0uDV8jIrvGrS047AMCbB9iPW2A==",
       "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/9.0.4",
+      "path": "microsoft.aspnetcore.spaproxy/9.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1781,7 +1781,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.SpaProxy.targets",
         "lib/net9.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.9.0.4.nupkg.sha512",
+        "microsoft.aspnetcore.spaproxy.9.0.3.nupkg.sha512",
         "microsoft.aspnetcore.spaproxy.nuspec"
       ]
     },
@@ -4855,23 +4855,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MrFEt\\.nuget\\packages\\": {},
+    "C:\\Users\\vuong\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Sturdy\\web_and_aplication\\xdpmWeb\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
+      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
       "projectName": "ClothingWebsite.Server",
-      "projectPath": "D:\\Sturdy\\web_and_aplication\\xdpmWeb\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
-      "packagesPath": "C:\\Users\\MrFEt\\.nuget\\packages\\",
-      "outputPath": "D:\\Sturdy\\web_and_aplication\\xdpmWeb\\ClothingWebsite\\ClothingWebsite.Server\\obj\\",
+      "projectPath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
+      "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\MrFEt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4880,6 +4880,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4946,7 +4947,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
