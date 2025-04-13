@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/yoGlFqW0Lg=",
+  "dgSpecHash": "5rDya7hDywY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\QuanAo\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
+  "projectFilePath": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\final\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\ClothingWebsite.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vuong\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\vuong\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
