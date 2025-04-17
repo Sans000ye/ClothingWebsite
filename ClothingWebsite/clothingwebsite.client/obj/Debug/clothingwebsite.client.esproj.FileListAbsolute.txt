@@ -1,2 +1,0 @@
-C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\clothingwebsite.client\obj\Debug\clothingwebsite.client.esproj.CoreCompileInputs.cache
-C:\Users\vuong\Desktop\All Project\ClothingWebsite\QuanAo\ClothingWebsite\ClothingWebsite\clothingwebsite.client\obj\Debug\clothingwebsite.client.esproj.CoreCompileInputs.cache
