@@ -10,6 +10,7 @@ import Formal from "./components/Formal/Formal";
 import Party from "./components/Party/Party";
 import Gym from "./components/Gym/Gym";
 import NewArrivals from "./components/NewArrivals/NewArrivals";
+import Product from "./components/Product/Product";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/gym" element={<Gym />} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="/new-arrivals" element={<NewArrivals/>} />
+          <Route path="/product/:id" element={<Product />} />
           {/* <Route path="contact" element={<Contact/>}/> */}
         </Route>
       </Routes>
