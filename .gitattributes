@@ -1,0 +1,3 @@
+# Automatically use "theirs" resolution for build output files:
+ClothingWebsite/ClothingWebsite.Server/bin/** merge=theirs
+ClothingWebsite/ClothingWebsite.Server/obj/** merge=theirs
