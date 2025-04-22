@@ -1,58 +1,82 @@
-import React, { useState } from 'react';
-import pancakes from '../img/pancakes.png';
-
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // 👈 Lấy ID từ URL
 import './Product.css';
 
 const Product = () => {
+  const { id } = useParams(); // 👈 /product/:id
+  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState('Large');
-  const [selectedColor, setSelectedColor] = useState('brown');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
+
+  useEffect(() => {
+    // Gọi API lấy chi tiết sản phẩm
+    fetch(`https://localhost:7193/api/SanPham/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+        // Khởi tạo giá trị mặc định
+        setSelectedSize(data?.availableSizes?.[0] || '');
+        setSelectedColor(data?.availableColors?.[0] || '');
+      })
+      .catch((err) => console.error('Error loading product:', err));
+  }, [id]);
 
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === 'inc' ? prev + 1 : prev > 1 ? prev - 1 : 1));
   };
 
+  if (!product) return <div>Loading...</div>;
+
   return (
     <div className="product-container">
       <div className="product-images">
         <div className="thumbnail-images">
-          <img src={pancakes} alt="Thumbnail 1" />
-          <img src={pancakes} alt="Thumbnail 2" />
-          <img src={pancakes} alt="Thumbnail 3" />
+          {product.images?.map((img, idx) => (
+            <img key={idx} src={img} alt={`Thumbnail ${idx + 1}`} />
+          ))}
         </div>
         <div className="main-image">
-          <img src={pancakes} alt="Main Product" />
+          <img src={product.mainImage || product.images?.[0]} alt="Main Product" />
         </div>
       </div>
 
       <div className="product-details">
-        <h1>ONE LIFE GRAPHIC T-SHIRT</h1>
+        <h1>{product.name}</h1>
         <div className="product-rating">
-          <span>⭐️⭐️⭐️⭐️⭐️ 4.5/5</span>
+          <span>⭐️⭐️⭐️⭐️⭐️ {product.rating || '4.5/5'}</span>
         </div>
         <div className="product-price">
-          <span className="current-price">$260</span>
-          <span className="original-price">$300</span>
-          <span className="discount">-40%</span>
+          <span className="current-price">${product.price}</span>
+          {product.originalPrice && (
+            <>
+              <span className="original-price">${product.originalPrice}</span>
+              <span className="discount">
+                -{Math.round(100 - (product.price / product.originalPrice) * 100)}%
+              </span>
+            </>
+          )}
         </div>
-        <p className="product-description">
-          This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.
-        </p>
+        <p className="product-description">{product.description}</p>
 
         <div className="product-options">
           <div className="colors">
             <span>Select Colors</span>
             <div className="color-options">
-              <button className={selectedColor === 'brown' ? 'active' : ''} onClick={() => setSelectedColor('brown')}></button>
-              <button className={selectedColor === 'green' ? 'active' : ''} onClick={() => setSelectedColor('green')}></button>
-              <button className={selectedColor === 'navy' ? 'active' : ''} onClick={() => setSelectedColor('navy')}></button>
+              {product.availableColors?.map((color) => (
+                <button
+                  key={color}
+                  className={selectedColor === color ? 'active' : ''}
+                  onClick={() => setSelectedColor(color)}
+                />
+              ))}
             </div>
           </div>
 
           <div className="sizes">
             <span>Choose Size</span>
             <div className="size-options">
-              {['Small', 'Medium', 'Large', 'X-Large'].map((size) => (
+              {product.availableSizes?.map((size) => (
                 <button
                   key={size}
                   className={selectedSize === size ? 'active' : ''}

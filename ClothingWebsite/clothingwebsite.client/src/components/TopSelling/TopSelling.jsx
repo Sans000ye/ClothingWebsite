@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./TopSelling.css";
 import { createProduct } from "../../Helper/productHelper";
+import { API_BASE } from "../../config";
+import { Link } from 'react-router-dom';
 
 
 const topSellingProducts = [
-  createProduct(1, "/images/top1.jpg", "Classic Leather Jacket", 4.7, 300),
+  createProduct(1, `${API_BASE}/images/tshirt-tape-details.png`, "T-shirt with Tape Details", 4.7, 300),
   createProduct(2, "/images/top2.jpg", "High-Waist Trousers", 4.3, 120, 150, "-20%"),
   createProduct(3, "/images/top3.jpg", "Casual Sneakers", 4.6, 90),
   createProduct(4, "/images/top4.jpg", "Elegant Blouse", 4.5, 80, 100, "-20%"),
@@ -24,6 +26,7 @@ const TopSelling = () => {
       <h2 className="top-selling-title">TOP SELLING</h2>
       <div className="top-selling-list">
         {displayedProducts.map((product) => (
+          <Link to={`/product/${product.id}`}>
           <div key={product.id} className="top-selling-card">
             <img src={product.image} alt={product.name} className="top-selling-image" />
             <p className="top-selling-name">{product.name}</p>
@@ -40,6 +43,7 @@ const TopSelling = () => {
               )}
             </div>
           </div>
+          </Link>
         ))}
       </div>
       <button className="top-selling-view-all" onClick={() => setShowAll(!showAll)}>

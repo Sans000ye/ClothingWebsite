@@ -1,19 +1,77 @@
 import React, { useState } from "react";
 import "./NewArrivals.css";
-import { createProduct } from "../../Helper/productHelper";
 import { API_BASE } from "../../config";
+import { Link } from 'react-router-dom';
+
+
 
 const products = [
-  createProduct(1, `${API_BASE}/images/black-striped.png`, "T-shirt with Tape Details", 4.5, 120),
-  createProduct(2, `${API_BASE}/images/skinny-fit-jeans.png`, "Skinny Fit Jeans", 3.5, 240, 260, "-20%"),
-  createProduct(3, "/img/clother/atst747-2v.png", "Checkered Shirt", 4.5, 180),
-  createProduct(4, "/img/clother/tshirt.jpg", "Sleeve Striped T-shirt", 4.5, 130, 160, "-30%"),
-  createProduct(5, "/images/product5.jpg", "Product 5", 4.0, 150),
-  createProduct(6, "/img/clother/tshirt.jpg", "Product 6", 4.2, 200, 250, "-20%"),
-  createProduct(7, "/img/clother/tshirt.jpg", "Product 7", 4.2, 200, 250, "-20%"),
-  createProduct(8, "/img/Banner.png", "Product 8", 4.2, 200, 250, "-20%"),
-  createProduct(9, "/img/Banner.png", "Product 8", 4.2, 200, 250, "-20%"),
-
+  {
+    id: 1,
+    name: "T-shirt with Tape Details",
+    image: `${API_BASE}/images/black-striped.png`,
+    price: 120,
+    rating: 4.5
+  },
+  {
+    id: 2,
+    name: "Skinny Fit Jeans",
+    image: `${API_BASE}/images/skinny-jeans.png`,
+    price: 240,
+    originalPrice: 260,
+    discount: "-20%",
+    rating: 3.5
+  },
+  {
+    id: 3,
+    name: "Checkered Shirt",
+    image: `${API_BASE}/images/checkered-shirt.png`,
+    price: 180,
+    rating: 4.5
+  },
+  {
+    id: 4,
+    name: "Sleeve Striped T-shirt",
+    image: `${API_BASE}/images/sleeve-striped.png`,
+    price: 130,
+    originalPrice: 160,
+    discount: "-30%",
+    rating: 4.5
+  },
+  {
+    id: 5,
+    name: "Product 5",
+    image: `${API_BASE}/images/product5.jpg`,
+    price: 150,
+    rating: 4.0
+  },
+  {
+    id: 6,
+    name: "Product 6",
+    image: `${API_BASE}/images/product6.jpg`,
+    price: 200,
+    originalPrice: 250,
+    discount: "-20%",
+    rating: 4.2
+  },
+  {
+    id: 7,
+    name: "Product 7",
+    image: `${API_BASE}/images/product7.jpg`,
+    price: 200,
+    originalPrice: 250,
+    discount: "-20%",
+    rating: 4.2
+  },
+  {
+    id: 8,
+    name: "Product 8",
+    image: `${API_BASE}/images/product8.png`,
+    price: 200,
+    originalPrice: 250,
+    discount: "-20%",
+    rating: 4.2
+  },
 ];
 
 const NewArrivals = () => {
@@ -25,6 +83,7 @@ const NewArrivals = () => {
       <h2 className="title">NEW ARRIVALS</h2>
       <div className="product-list">
         {displayedProducts.map((product) => (
+        <Link to={`/product/${product.id}`}>
           <div key={product.id} className="product-card">
             <img src={product.image} alt={product.name} className="product-image" />
             <p className="product-name">{product.name}</p>
@@ -40,7 +99,9 @@ const NewArrivals = () => {
                 </>
               )}
             </div>
+
           </div>
+        </Link>
         ))}
       </div>
       <button className="view-all" onClick={() => setShowAll(!showAll)}>
