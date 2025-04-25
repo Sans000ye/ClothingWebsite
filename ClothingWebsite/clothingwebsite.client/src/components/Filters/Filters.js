@@ -6,7 +6,6 @@ import Divider from '@mui/material/Divider';
 import Slider from '@mui/material/Slider';
 
 
-
 function Filters({ onApply }) {
     const [openSections, setOpenSections] = useState({
         styles: true,

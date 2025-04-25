@@ -29,8 +29,6 @@ public partial class QuanAoContext : DbContext
 
     public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=HELPMEIMBLIND\\SQLEXPRESS;Database=QuanAo;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -98,7 +96,7 @@ public partial class QuanAoContext : DbContext
             entity.ToTable("SanPhamKhachHang");
 
             entity.Property(e => e.MaTaiKhoan)
-                .HasMaxLength(10)
+                .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.MaSanPham)
                 .HasMaxLength(10)
@@ -148,7 +146,7 @@ public partial class QuanAoContext : DbContext
             entity.HasIndex(e => e.Username, "UQ__TaiKhoan__536C85E458DB4F16").IsUnique();
 
             entity.Property(e => e.MaTaiKhoan)
-                .HasMaxLength(10)
+                .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Password)
                 .HasMaxLength(255)

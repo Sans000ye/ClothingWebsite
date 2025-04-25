@@ -508,3 +508,4 @@ C:\Users\vuong\Desktop\All Project\cloth\ClothingWebsite\ClothingWebsite\Clothin
 C:\Users\vuong\Desktop\All Project\cloth\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\obj\Debug\net9.0\ClothingWebsite.Server.pdb
 C:\Users\vuong\Desktop\All Project\cloth\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\obj\Debug\net9.0\ClothingWebsite.Server.genruntimeconfig.cache
 C:\Users\vuong\Desktop\All Project\cloth\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\obj\Debug\net9.0\ref\ClothingWebsite.Server.dll
+C:\Users\vuong\Desktop\All Project\cloth\ClothingWebsite\ClothingWebsite\ClothingWebsite.Server\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
