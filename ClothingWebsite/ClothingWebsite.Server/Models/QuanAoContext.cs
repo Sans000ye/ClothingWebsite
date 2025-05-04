@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace ClothingWebsite.Server.Models;
 
@@ -28,7 +29,6 @@ public partial class QuanAoContext : DbContext
     public virtual DbSet<Style> Styles { get; set; }
 
     public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -88,7 +88,7 @@ public partial class QuanAoContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__SanPham__MaStyle__7A672E12");
         });
-
+        
         modelBuilder.Entity<SanPhamKhachHang>(entity =>
         {
             entity.HasKey(e => new { e.MaTaiKhoan, e.MaSanPham }).HasName("PK__SanPhamK__62D0116B24603860");

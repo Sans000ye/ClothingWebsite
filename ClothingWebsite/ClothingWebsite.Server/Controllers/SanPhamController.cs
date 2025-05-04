@@ -11,11 +11,11 @@ namespace ClothingWebsite.Server.Controllers
     [Route("api/[controller]")]
     public class SanPhamController : ControllerBase
     {
-        private readonly QuanAoContext _db;
+        private readonly QuanAoContext _context;
 
-        public SanPhamController(QuanAoContext db)
+        public SanPhamController(QuanAoContext context)
         {
-            _db = db;
+            _context = context;
         }
 
         // Route: api/SanPham/LayDSSanPham
@@ -24,7 +24,7 @@ namespace ClothingWebsite.Server.Controllers
         {
             try
             {
-                var ans = _db.SanPhams.Select(
+                var ans = _context.SanPhams.Select(
                     t => new
                     {
                         t.MaSanPham,
@@ -57,7 +57,7 @@ namespace ClothingWebsite.Server.Controllers
         {
             try
             {
-                var query = _db.SanPhams.AsQueryable();
+                var query = _context.SanPhams.AsQueryable();
 
                 // Apply filters only if the parameter is not null or empty
                 if (!string.IsNullOrEmpty(style))
@@ -105,65 +105,64 @@ namespace ClothingWebsite.Server.Controllers
 
         // Route: api/SanPham/ApplyFilters
         [HttpPost("ApplyFilters")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
         public IActionResult ApplyFilters([FromBody] FilterCriteria filterCriteria)
         {
             try
             {
-                var sp = _db.SanPhams.AsQueryable();
+                var query = _context.SanPhams
+                    .Include(s => s.MaLoaiNavigation)
+                    .Include(s => s.MaMauNavigation)
+                    .Include(s => s.MaSizeNavigation)
+                    .Include(s => s.MaStyleNavigation)
+                    .AsQueryable();
 
-                if (!string.IsNullOrEmpty(filterCriteria.Style))
-                {
-                    sp = sp.Where(a => a.MaStyleNavigation.Style1 == filterCriteria.Style);
-                }
-
-                if (!string.IsNullOrEmpty(filterCriteria.Size))
-                {
-                    sp = sp.Where(a => a.MaSizeNavigation.Size1 == filterCriteria.Size);
-                }
-
+                // Apply filters only if they are provided
                 if (!string.IsNullOrEmpty(filterCriteria.Type))
                 {
-                    sp = sp.Where(a => a.MaLoaiNavigation.Loai == filterCriteria.Type);
-                }
-
-                if (!string.IsNullOrEmpty(filterCriteria.Color))
-                {
-                    sp = sp.Where(a => a.MaMauNavigation.Mau == filterCriteria.Color);
+                    query = query.Where(p => p.MaLoaiNavigation.Loai == filterCriteria.Type);
                 }
 
                 if (filterCriteria.PriceRange != null && filterCriteria.PriceRange.Length == 2)
                 {
-                    int minPrice = filterCriteria.PriceRange[0];
-                    int maxPrice = filterCriteria.PriceRange[1];
-                    sp = sp.Where(a => a.Gia >= minPrice && a.Gia <= maxPrice);
+                    query = query.Where(p => p.Gia >= filterCriteria.PriceRange[0] && 
+                                           p.Gia <= filterCriteria.PriceRange[1]);
                 }
 
-                var result = sp.Select(t => new
+                if (!string.IsNullOrEmpty(filterCriteria.Style))
                 {
-                    t.MaSanPham,
-                    t.TenSanPham,
-                    t.Gia,
-                    t.SoLuong,
-                    t.HinhAnh,
-                    t.MaLoaiNavigation.Loai,
-                    t.MaMauNavigation.Mau,
-                    t.MaStyleNavigation.Style1,
-                    t.MaSizeNavigation.Size1
+                    query = query.Where(p => p.MaStyleNavigation.Style1 == filterCriteria.Style);
+                }
+
+                if (!string.IsNullOrEmpty(filterCriteria.Size))
+                {
+                    query = query.Where(p => p.MaSizeNavigation.Size1 == filterCriteria.Size);
+                }
+
+                if (!string.IsNullOrEmpty(filterCriteria.Color))
+                {
+                    query = query.Where(p => p.MaMauNavigation.Mau == filterCriteria.Color);
+                }
+
+                var result = query.Select(p => new
+                {
+                    p.MaSanPham,
+                    p.TenSanPham,
+                    p.Gia,
+                    p.SoLuong,
+                    p.HinhAnh,
+                    Loai = p.MaLoaiNavigation.Loai,
+                    Mau = p.MaMauNavigation.Mau,
+                    Size = p.MaSizeNavigation.Size1,
+                    Style = p.MaStyleNavigation.Style1
                 }).ToList();
 
-                if (result == null || !result.Any())
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    return Ok(result);
-                }
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
@@ -172,15 +171,15 @@ namespace ClothingWebsite.Server.Controllers
         {
             try
             {
-                SanPham? sp = _db.SanPhams.Where(a => a.MaSanPham == Id).FirstOrDefault();
+                SanPham? sp = _context.SanPhams.Where(a => a.MaSanPham == Id).FirstOrDefault();
                 if (sp is null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    _db.SanPhams.Remove(sp);
-                    _db.SaveChanges();
+                    _context.SanPhams.Remove(sp);
+                    _context.SaveChanges();
                     return Ok();
                 }
             }
@@ -196,8 +195,8 @@ namespace ClothingWebsite.Server.Controllers
             try
             {
                 var obj = value.Adapt<SanPham>();
-                _db.SanPhams.Add(obj);
-                _db.SaveChanges();
+                _context.SanPhams.Add(obj);
+                _context.SaveChanges();
                 return Ok();
             }
             catch

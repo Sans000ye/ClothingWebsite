@@ -83,25 +83,24 @@ const NewArrivals = () => {
       <h2 className="title">NEW ARRIVALS</h2>
       <div className="product-list">
         {displayedProducts.map((product) => (
-        <Link to={`/product/${product.id}`}>
-          <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} className="product-image" />
-            <p className="product-name">{product.name}</p>
-            <div className="product-rating">
-              {"⭐".repeat(Math.floor(product.rating))} {product.rating}/5
+          <Link key={product.id} to={`/product/${product.id}`}>
+            <div className="product-card">
+              <img src={product.image} alt={product.name} className="product-image" />
+              <p className="product-name">{product.name}</p>
+              <div className="product-rating">
+                {"⭐".repeat(Math.floor(product.rating))} {product.rating}/5
+              </div>
+              <div className="product-price">
+                <span className="price">${product.price}</span>
+                {product.originalPrice && (
+                  <>
+                    <span className="original-price">${product.originalPrice}</span>
+                    <span className="discount">{product.discount}</span>
+                  </>
+                )}
+              </div>
             </div>
-            <div className="product-price">
-              <span className="price">${product.price}</span>
-              {product.originalPrice && (
-                <>
-                  <span className="original-price">${product.originalPrice}</span>
-                  <span className="discount">{product.discount}</span>
-                </>
-              )}
-            </div>
-
-          </div>
-        </Link>
+          </Link>
         ))}
       </div>
       <button className="view-all" onClick={() => setShowAll(!showAll)}>

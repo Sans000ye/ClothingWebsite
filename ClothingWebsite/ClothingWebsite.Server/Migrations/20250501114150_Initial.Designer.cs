@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothingWebsite.Server.Migrations
 {
     [DbContext(typeof(QuanAoContext))]
-    [Migration("20250307032246_1")]
-    partial class _1
+    [Migration("20250501114150_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,9 +121,9 @@ namespace ClothingWebsite.Server.Migrations
             modelBuilder.Entity("ClothingWebsite.Server.Models.SanPhamKhachHang", b =>
                 {
                     b.Property<string>("MaTaiKhoan")
-                        .HasMaxLength(10)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("MaSanPham")
                         .HasMaxLength(10)
@@ -190,9 +190,9 @@ namespace ClothingWebsite.Server.Migrations
             modelBuilder.Entity("ClothingWebsite.Server.Models.TaiKhoan", b =>
                 {
                     b.Property<string>("MaTaiKhoan")
-                        .HasMaxLength(10)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Password")
                         .IsRequired()

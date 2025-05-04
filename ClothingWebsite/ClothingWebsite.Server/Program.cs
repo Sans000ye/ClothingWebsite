@@ -1,13 +1,13 @@
-using ClothingWebsite.Server.Models;
 using Microsoft.EntityFrameworkCore;
+using ClothingWebsite.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
 builder.Services.AddDbContext<QuanAoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -15,10 +15,22 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:53196")
+        policy.WithOrigins(
+                "http://localhost:5000", "https://localhost:5000",
+                "http://localhost:53196", "https://localhost:53196")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
+
+    options.AddPolicy("AllowReactApp",
+        builder =>
+        {
+            builder
+                .WithOrigins("http://localhost:53196")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithExposedHeaders("*");
+        });
 });
 
 var app = builder.Build();
@@ -33,7 +45,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowFrontend");
+app.UseCors("AllowReactApp");
 
 app.UseAuthorization();
 

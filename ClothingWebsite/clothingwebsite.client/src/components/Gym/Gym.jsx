@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Filters from "../Filters/Filters"; // Import bộ lọc
+import Filters from "../Filters/Filters.jsx"; // Import bộ lọc
 const API_BASE = "http://localhost:5000";
 
 const Gym = () => {

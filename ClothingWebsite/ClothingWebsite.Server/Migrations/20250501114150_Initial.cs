@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
-
 namespace ClothingWebsite.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class _1 : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,7 +65,7 @@ namespace ClothingWebsite.Server.Migrations
                 name: "TaiKhoan",
                 columns: table => new
                 {
-                    MaTaiKhoan = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    MaTaiKhoan = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
                     Username = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     QuyenTaiKhoan = table.Column<int>(type: "int", nullable: false)
@@ -82,13 +81,13 @@ namespace ClothingWebsite.Server.Migrations
                 {
                     MaSanPham = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     TenSanPham = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    HinhAnh = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true),
+                    Gia = table.Column<int>(type: "int", nullable: true),
+                    SoLuong = table.Column<int>(type: "int", nullable: false),
                     MaLoai = table.Column<int>(type: "int", nullable: false),
                     MaMau = table.Column<int>(type: "int", nullable: false),
                     MaSize = table.Column<int>(type: "int", nullable: false),
-                    MaStyle = table.Column<int>(type: "int", nullable: false),
-                    HinhAnh = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true),
-                    Gia = table.Column<int>(type: "int", nullable: true),
-                    SoLuong = table.Column<int>(type: "int", nullable: false)
+                    MaStyle = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,7 +120,7 @@ namespace ClothingWebsite.Server.Migrations
                 name: "SanPhamKhachHang",
                 columns: table => new
                 {
-                    MaTaiKhoan = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    MaTaiKhoan = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
                     MaSanPham = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     SoLuong = table.Column<int>(type: "int", nullable: false)
                 },

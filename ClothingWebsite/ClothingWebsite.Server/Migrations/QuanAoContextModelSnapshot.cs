@@ -118,9 +118,9 @@ namespace ClothingWebsite.Server.Migrations
             modelBuilder.Entity("ClothingWebsite.Server.Models.SanPhamKhachHang", b =>
                 {
                     b.Property<string>("MaTaiKhoan")
-                        .HasMaxLength(10)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("MaSanPham")
                         .HasMaxLength(10)
@@ -187,9 +187,9 @@ namespace ClothingWebsite.Server.Migrations
             modelBuilder.Entity("ClothingWebsite.Server.Models.TaiKhoan", b =>
                 {
                     b.Property<string>("MaTaiKhoan")
-                        .HasMaxLength(10)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Password")
                         .IsRequired()

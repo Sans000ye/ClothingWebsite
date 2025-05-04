@@ -11,14 +11,14 @@ const DressStyle = () => {
       <div className="dress-style-row">
           <Link to ="/casual" className="dress-category casual">
             <div>
-                <img src="http://localhost:5000/images/Casual.png" alt="" />
+                <img src="http://localhost:53196/images/Casual.png" alt="" />
                   <span>Casual</span>
             </div>
           </Link>
 
           <Link to ="/formal" className="dress-category formal">
             <div>
-                <img src= "http://localhost:5000/images/Formal.png"alt="" />
+                <img src= "http://localhost:53196/images/Formal.png"alt="" />
                   <span>Formal</span>
             </div>
         </Link>
@@ -28,14 +28,14 @@ const DressStyle = () => {
       <div className="dress-style-row">
         <Link to ="/party" className="dress-category party">
           <div >
-              <img src="http://localhost:5000/images/Party.png" alt="" />
+              <img src="http://localhost:53196/images/Party.png" alt="" />
                 <span>Party</span>
           </div>
         </Link>
 
         <Link to ="/gym" className="dress-category gym">
           <div>
-              <img src="http://localhost:5000/images/Gym.png" alt="" />
+              <img src="http://localhost:53196/images/Gym.png" alt="" />
                 <span>Gym</span>
           </div>
         </Link>
