@@ -74,7 +74,7 @@ const Sort = () => {
       <div
         style={{
           width: "295px",
-          border: "1px solid black",
+          border: "1px solid #e6e6e6",
           borderRadius: "15px",
           padding: "10px",
           boxSizing: "border-box",

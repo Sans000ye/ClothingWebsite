@@ -4,14 +4,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400px;0,700;0,900;1,100;1,300;1,400px;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400px;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400px;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-    body {
+body {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -27,26 +26,24 @@ h1 {
 }
 
 .Filters-container * {
-    
     text-decoration: none;
     list-style-type: none;
     background: none;
 }
 
-/* Button Container */
 .button-container {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-/* General Button Styles */
 .btn {
     width: 100%;
     background: none;
     border: none;
     text-align: left;
-    padding: 8px 16px;
+    padding-top: 8px ;
+    
     cursor: pointer;
     font-size: 16px;
     opacity: 0.6;
@@ -86,7 +83,6 @@ h1 {
     font-weight: bold;
 }
 
-/* Color Button Styles */
 .color-btn {
     width: 30px;
     height: 30px;
@@ -94,28 +90,47 @@ h1 {
     border: 2px solid rgba(0, 0, 0, 0.25);
     cursor: pointer;
     margin: 5px;
+    opacity: 1;
+    position: relative;
+    transition: opacity 0.2s;
+    background: none;
 }
 
-.color-btn.selected {
-    border: 2px solid black;
+.color-btn::after {
+    content: "✔";
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
 }
 
-/* Override for color buttons to remove the ">" symbol */
-.color-btn::after{
-    content: none !important; /* Remove the ">" symbol */
+.color-btn:hover::after {
+    opacity: 0.5;
 }
 
-/* Size Button Styles */
+.color-btn.selected::after {
+    opacity: 1;
+}
+
 .size-btn {
     width: fit-content;
-    background: none;
+    background: #F0F0F0;
     border: none;
     text-align: left;
     padding: 8px 16px;
     cursor: pointer;
     font-size: 16px;
+    color: #000000;
     opacity: 0.6;
-    transition: opacity 0.25s ease;
+    transition: 
+        opacity 0.25s ease,
+        background 0.25s,
+        color 0.25s;
     outline: none;
     position: relative;
 }
@@ -129,19 +144,18 @@ h1 {
 }
 
 .size-btn.selected {
+    background: #000000;
+    color: #FFFFFF;
     opacity: 1;
-    font-weight: bold;
-    outline: none;
 }
 
-/* Apply Button Styles */
 .apply-btn {
     width: 100%;
     padding: 12px;
     background-color: black;
     color: white;
     border: none;
-    border-radius: 8px  ;
+    border-radius: 8px;
     cursor: pointer;
     transition: opacity 0.3s;
     text-align: center;
@@ -151,7 +165,6 @@ h1 {
     opacity: 0.8;
 }
 
-/* Dropdown Section Styles */
 section {
     margin: 24px;
 }
@@ -161,44 +174,39 @@ section {
     font-weight: bold;
 }
 
-/* General Dropdown Content */
 .dropdown-content {
     display: none;
     max-height: 0;
     opacity: 0;
-    overflow: hidden; /* Prevent overflow by default */
-    padding: 0; /* Remove padding to avoid clipping */
+    overflow: hidden;
+    padding: 0;
     transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
 .dropdown-content.open {
     display: block;
-    max-height: 500px; /* Adjust as needed */
+    max-height: 500px;
     opacity: 1;
-    overflow: visible; /* Allow overflow when open */
-    padding: 10px; /* Add padding only when open */
+    overflow: visible;
+    padding: 10px;
 }
 
-/* Specific Styling for Price Section */
 .dropdown-content.price {
-    overflow: visible; /* Ensure the price section allows overflow */
+    overflow: visible;
 }
 
-/* Allow overflow for the Price section */
 .dropdown-content.price {
-    overflow: visible; /* Allow overflow for the slider */
+    overflow: visible;
 }
 
-/* Price Labels */
 .price-labels {
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
     font-size: 14px;
-    color: black; /* Ensure the text is black */
+    color: black;
 }
 
-/* Color Definitions */
 #White      { background: #fff;    border: 2px solid rgba(0, 0, 0, 0.25);}
 #Black      { background: #000;    border: 2px solid rgba(0, 0, 0, 0.25);}
 #Green      { background: #008000; border: 2px solid rgba(0, 0, 0, 0.25);}
@@ -296,29 +304,39 @@ section {
     opacity: 100%;
 }
 
-/* Specific styles for color and size buttons */
 .color-btn
 {
-    border: none; /* Remove border for these buttons */
-    background: none; /* Ensure no background */
-    border-radius: 0; /* Remove any border radius */
-    padding: 8px; /* Adjust padding if needed */
+    border: none;
+    background: none;
+    border-radius: 0;
+    padding: 8px;
 }
 
 .size-btn{
-    border: none; /* Remove border for these buttons */
-    background: #F0F0F0;/* Ensure no background */
+    border: none;
+    background: #F0F0F0;
     color: #00000099;
     padding: 10px 20px 10px 20px;
     border-radius: 15px;
     opacity: 60%;
 }
-
 .color-btn.selected,
 .size-btn.selected {
     border: none;
 }
-
 .color-btn{
     border-radius: 100%;
+}
+.Filters .dropdown-header{
+    margin-left: 0;
+    padding-left: 10px;
+}
+.Filters h1 {
+    margin-left: 0;
+    padding-left: 18px;
+}
+.Filters .MuiDivider-root {
+    margin-left: 16px !important;
+    margin-right: 0 !important;
+    width: calc(100% - 25px) !important;
 }

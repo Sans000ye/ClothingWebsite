@@ -150,29 +150,7 @@ function Filters({ onApply }) {
                 </ListItem>
                 <Divider variant="middle"/>
 
-                {/* Types Section */}
-                <section>
-                    <h2
-                        onClick={() => toggleSection('types')}
-                        className="dropdown-header"
-                    >
-                        Types
-                    </h2>
-                    <div className={`dropdown-content ${openSections.types ? 'open' : ''}`}>
-                        <div className="button-container">
-                            {['T-Shirts', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'].map((type) => (
-                                <button
-                                    key={type}
-                                    className={`btn ${typeFilter === type ? 'selected' : ''}`}
-                                    onClick={() => setTypeFilter(typeFilter === type ? '' : type)}
-                                >
-                                    {type}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-                <Divider variant="middle"/>
+
 
                 {/* Styles Section */}
                 <section>
@@ -180,7 +158,7 @@ function Filters({ onApply }) {
                         onClick={() => toggleSection('styles')}
                         className="dropdown-header"
                     >
-                        Styles
+                        
                     </h2>
                     <div className={`dropdown-content ${openSections.styles ? 'open' : ''}`}>
                         <div className="button-container">
@@ -215,6 +193,18 @@ function Filters({ onApply }) {
                                 min={0}
                                 max={200000}
                                 step={10000}
+                                sx={{
+                                    color: "#000", // Makes the slider track and thumb black
+                                    '& .MuiSlider-thumb': {
+                                        backgroundColor: '#000',
+                                    },
+                                    '& .MuiSlider-track': {
+                                        backgroundColor: '#000',
+                                    },
+                                    '& .MuiSlider-rail': {
+                                        backgroundColor: '#ccc',
+                                    }
+                                }}
                             />
                             <div className="price-labels">
                                 <span
