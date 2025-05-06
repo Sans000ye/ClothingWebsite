@@ -2,10 +2,10 @@
 {
     public class FilterCriteria
     {
-        public string Type { get; set; } = string.Empty;
-        public decimal[] PriceRange { get; set; } = new decimal[] { 0, 1000000 };
-        public string Style { get; set; } = string.Empty;
-        public string Size { get; set; } = string.Empty;
-        public string Color { get; set; } = string.Empty;
+        public string Style { get; set; }
+        public string Size { get; set; }
+        public string Type { get; set; }
+        public string Color { get; set; }
+        public int[] PriceRange { get; set; } // Assuming price range is an array with two elements [min, max]
     }
 }

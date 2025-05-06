@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login_Signup.css";
+import "./LoginSignup.css";
 
 const Login_Signup = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -9,19 +9,49 @@ const Login_Signup = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h2>{isSignup ? "Đăng Ký" : "Đăng Nhập"}</h2>
-        <form>
-          {isSignup && <input type="text" placeholder="Họ và tên" required />}
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          {isSignup && <input type="password" placeholder="Confirm Password" required />}
-          <button type="submit" className="auth-button">{isSignup ? "Đăng Ký" : "Đăng Nhập"}</button>
-        </form>
-        <p className="toggle-text" onClick={toggleAuthMode}>
-          {isSignup ? "Bạn đã có tài khoản rồi? Đăng nhập thôi" : "Bạn chưa có tài khoản? Đăng ký ở đây"}
-        </p>
+    <div className="pageBackground">
+      <div className="authContainer">
+        <div className="authBox">
+          <h2>{isSignup ? "Đăng Ký" : "Đăng Nhập"}</h2>
+          <form>
+            {isSignup && (
+              <input
+                type="text"
+                placeholder="Họ và tên"
+                required
+                className="inputField"
+              />
+            )}
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              className="inputField"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              className="inputField"
+            />
+            {isSignup && (
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                required
+                className="inputField"
+              />
+            )}
+            <button type="submit" className="authButton">
+              {isSignup ? "Đăng Ký" : "Đăng Nhập"}
+            </button>
+          </form>
+          <p className="toggleText" onClick={toggleAuthMode}>
+            {isSignup
+              ? "Bạn đã có tài khoản rồi? Đăng nhập thôi"
+              : "Bạn chưa có tài khoản? Đăng ký ở đây"}
+          </p>
+        </div>
       </div>
     </div>
   );

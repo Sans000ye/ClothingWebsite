@@ -1,0 +1,61 @@
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .search-icon {
+    margin-right: 10px;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Hiệu ứng mờ khi hiển thị kết quả tìm kiếm */
+  .search-results {
+    position: absolute;
+    top: 40px; /* Điều chỉnh tùy theo vị trí của input */
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000; /* Đảm bảo dropdown không bị che khuất */
+  }
+  
+  /* Khi có kết quả tìm kiếm, dropdown sẽ hiển thị */
+  .search-bar.open .search-results {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Kiểu dáng của từng item trong kết quả tìm kiếm */
+  .search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    display: block;
+  }
+  
+  .search-result-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Đặc biệt cho hover */
+  .search-result-item:active {
+    background-color: #ddd;
+  }
+  

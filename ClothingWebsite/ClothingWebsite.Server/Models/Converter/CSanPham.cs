@@ -15,5 +15,17 @@
         public virtual MauSanPham MaMauNavigation { get; set; } = null!;
         public virtual Size MaSizeNavigation { get; set; } = null!;
         public virtual Style MaStyleNavigation { get; set; } = null!;
+        public static SanPham chuyendoiNguoc(CSanPham cSanPham)
+        {
+            return new SanPham
+            {
+                // Map properties from CSanPham to SanPham
+                // Example:
+                MaSanPham = cSanPham.MaSanPham,
+                TenSanPham = cSanPham.TenSanPham,
+                Gia = cSanPham.Gia,
+                // Add other property mappings as needed
+            };
+        }
     }
 }

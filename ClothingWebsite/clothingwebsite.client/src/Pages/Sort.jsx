@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import Filters from "../components/Filters/Filters";
 import Product from "../components/Product/Product";
 
-// Use HTTPS endpoint
 const API_URL = "https://localhost:7193";
 
 const Sort = () => {
@@ -15,36 +13,36 @@ const Sort = () => {
   const fetchProducts = async (filters = {}) => {
     try {
       const defaultFilter = {
-        Type: category && category.toLowerCase() !== "shop" ? category : "",
+        Type: category && category.toLowerCase() !== "shop" ? category : null,
         PriceRange: [0, 300],
-        Style: "",
-        Size: "",
-        Color: ""
+        Style: null,
+        Size: null,
+        Color: null,
+        ...filters
       };
 
-      const payload = { ...defaultFilter, ...filters };
+      // Do NOT filter out nulls, always send all properties
+      const payload = defaultFilter;
+
       console.log("Sending payload:", payload);
 
-      const response = await axios.post(
-        `${API_URL}/api/SanPham/ApplyFilters`,
-        payload,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      );
-      
-      console.log("Response received:", response.data);
-      setProducts(response.data);
+      const response = await fetch(`${API_URL}/api/SanPham/ApplyFilters`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
-      if (error.response) {
-        console.log("Response data:", error.response.data);
-        console.log("Response status:", error.response.status);
-        console.log("Response headers:", error.response.headers);
-      }
     }
   };
 

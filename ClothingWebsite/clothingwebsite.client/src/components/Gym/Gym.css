@@ -1,15 +1,17 @@
 /* Gym.css */
 
   .gym-container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px;
   }
   
   .page-title {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
+    margin-left: 80px;
   }
   
   .product-grid {
@@ -87,5 +89,18 @@
   .pagination button:hover {
     background-color: #000;
     color: #fff;
+  }
+
+  .gym-content {
+    display: flex;
+    align-items: flex-start; /* Giữ filters và products cùng hàng */
+  }
+  
+  .filters-column {
+    width: 250px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column; /* Đặt các phần tử trong cột theo chiều dọc */
+    gap: 20px; /* Khoảng cách giữa các bộ lọc */
   }
   

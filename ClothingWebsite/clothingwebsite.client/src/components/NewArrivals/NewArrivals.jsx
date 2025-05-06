@@ -1,110 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NewArrivals.css";
 import { API_BASE } from "../../config";
 import { Link } from 'react-router-dom';
 
-
-
-const products = [
-  {
-    id: 1,
-    name: "T-shirt with Tape Details",
-    image: `${API_BASE}/images/black-striped.png`,
-    price: 120,
-    rating: 4.5
-  },
-  {
-    id: 2,
-    name: "Skinny Fit Jeans",
-    image: `${API_BASE}/images/skinny-jeans.png`,
-    price: 240,
-    originalPrice: 260,
-    discount: "-20%",
-    rating: 3.5
-  },
-  {
-    id: 3,
-    name: "Checkered Shirt",
-    image: `${API_BASE}/images/checkered-shirt.png`,
-    price: 180,
-    rating: 4.5
-  },
-  {
-    id: 4,
-    name: "Sleeve Striped T-shirt",
-    image: `${API_BASE}/images/sleeve-striped.png`,
-    price: 130,
-    originalPrice: 160,
-    discount: "-30%",
-    rating: 4.5
-  },
-  {
-    id: 5,
-    name: "Product 5",
-    image: `${API_BASE}/images/product5.jpg`,
-    price: 150,
-    rating: 4.0
-  },
-  {
-    id: 6,
-    name: "Product 6",
-    image: `${API_BASE}/images/product6.jpg`,
-    price: 200,
-    originalPrice: 250,
-    discount: "-20%",
-    rating: 4.2
-  },
-  {
-    id: 7,
-    name: "Product 7",
-    image: `${API_BASE}/images/product7.jpg`,
-    price: 200,
-    originalPrice: 250,
-    discount: "-20%",
-    rating: 4.2
-  },
-  {
-    id: 8,
-    name: "Product 8",
-    image: `${API_BASE}/images/product8.png`,
-    price: 200,
-    originalPrice: 250,
-    discount: "-20%",
-    rating: 4.2
-  },
-];
-
 const NewArrivals = () => {
+  const [products, setProducts] = useState([]);
   const [showAll, setShowAll] = useState(false);
+
   const displayedProducts = showAll ? products : products.slice(0, 4);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://localhost:7193/api/QuanAo/ListQuanAoByLoai?loai=2");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div className="new-arrivals">
       <h2 className="title">NEW ARRIVALS</h2>
       <div className="product-list">
         {displayedProducts.map((product) => (
-          <Link key={product.id} to={`/product/${product.id}`}>
+          <Link to={`/product/${product.maSanPham}`} key={product.maSanPham} className="product-link">
             <div className="product-card">
-              <img src={product.image} alt={product.name} className="product-image" />
-              <p className="product-name">{product.name}</p>
-              <div className="product-rating">
-                {"⭐".repeat(Math.floor(product.rating))} {product.rating}/5
-              </div>
+              <img
+                src={`${API_BASE}/Images/${product.hinhAnh}?v=${product.maSanPham}`} // <-- chỉ lấy từ database, không nối thêm gì
+                alt={product.tenSanPham}
+                className="product-image"
+                onError={(e) => { e.target.src = '/fallback-image.jpg'; }} // fallback nếu lỗi ảnh
+              />
+              <p className="product-name">{product.tenSanPham}</p>
+              <div className="product-rating">⭐⭐⭐⭐ 4.5/5</div>
               <div className="product-price">
-                <span className="price">${product.price}</span>
-                {product.originalPrice && (
-                  <>
-                    <span className="original-price">${product.originalPrice}</span>
-                    <span className="discount">{product.discount}</span>
-                  </>
-                )}
+                <span className="price">{product.gia?.toLocaleString() ?? 0}₫</span>
               </div>
             </div>
           </Link>
         ))}
       </div>
       <button className="view-all" onClick={() => setShowAll(!showAll)}>
-        {showAll ? "Show Less" : "View All"}
+      {showAll ? "Show Less" : "View All"}
       </button>
     </div>
   );

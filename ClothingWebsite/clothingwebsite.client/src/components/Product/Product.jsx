@@ -1,82 +1,87 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // 👈 Lấy ID từ URL
+import { useParams } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
 import './Product.css';
 
 const Product = () => {
-  const { id } = useParams(); // 👈 /product/:id
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
+  const { addToCart } = useCart();
 
   useEffect(() => {
-    // Gọi API lấy chi tiết sản phẩm
-    fetch(`https://localhost:7193/api/SanPham/${id}`)
+    fetch("https://localhost:7193/api/QuanAo/ListQuanAo")
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data);
-        // Khởi tạo giá trị mặc định
-        setSelectedSize(data?.availableSizes?.[0] || '');
-        setSelectedColor(data?.availableColors?.[0] || '');
+        const foundProduct = data.find((p) => p.maSanPham.toString() === id);
+        if (foundProduct) {
+          setProduct(foundProduct);
+          setSelectedSize(foundProduct.availableSizes?.[0] || '');
+        }
       })
-      .catch((err) => console.error('Error loading product:', err));
+      .catch((err) => console.error("Error loading product:", err));
   }, [id]);
 
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === 'inc' ? prev + 1 : prev > 1 ? prev - 1 : 1));
   };
 
+  const handleAddToCart = () => {
+    if (!selectedSize) return alert("Please select a size.");
+    addToCart(product, quantity, selectedSize);
+    alert("Added to cart!");
+  };
+
   if (!product) return <div>Loading...</div>;
+
+  // Sử dụng mảng hình ảnh từ product (nếu có)
+  const imageList = product.images || [`https://localhost:7193/Images/${product.hinhAnh}`];
 
   return (
     <div className="product-container">
       <div className="product-images">
         <div className="thumbnail-images">
-          {product.images?.map((img, idx) => (
-            <img key={idx} src={img} alt={`Thumbnail ${idx + 1}`} />
+          {imageList.map((img, idx) => (
+            <img
+              key={idx}
+              src={`${img}?v=${product.maSanPham}`} // Thêm query string để tránh cache
+              alt={`Thumbnail ${idx + 1}`}
+              onClick={() => document.querySelector('.main-image img').src = `${img}?v=${product.maSanPham}`} // Chuyển đổi hình ảnh chính khi click
+            />
           ))}
         </div>
         <div className="main-image">
-          <img src={product.mainImage || product.images?.[0]} alt="Main Product" />
+          <img
+            src={`${imageList[0]}?v=${product.maSanPham}`} // Hiển thị ảnh chính
+            alt="Main Product"
+          />
         </div>
       </div>
 
       <div className="product-details">
-        <h1>{product.name}</h1>
+        <h1>{product.tenSanPham}</h1>
         <div className="product-rating">
           <span>⭐️⭐️⭐️⭐️⭐️ {product.rating || '4.5/5'}</span>
         </div>
         <div className="product-price">
-          <span className="current-price">${product.price}</span>
-          {product.originalPrice && (
+          <span className="current-price">{product.gia.toLocaleString()}₫</span>
+          {product.giaGoc && (
             <>
-              <span className="original-price">${product.originalPrice}</span>
+              <span className="original-price">{product.giaGoc.toLocaleString()}₫</span>
               <span className="discount">
-                -{Math.round(100 - (product.price / product.originalPrice) * 100)}%
+                -{Math.round(100 - (product.gia / product.giaGoc) * 100)}%
               </span>
             </>
           )}
         </div>
-        <p className="product-description">{product.description}</p>
+        <p className="product-description">{product.moTa}</p>
 
         <div className="product-options">
-          <div className="colors">
-            <span>Select Colors</span>
-            <div className="color-options">
-              {product.availableColors?.map((color) => (
-                <button
-                  key={color}
-                  className={selectedColor === color ? 'active' : ''}
-                  onClick={() => setSelectedColor(color)}
-                />
-              ))}
-            </div>
-          </div>
-
           <div className="sizes">
             <span>Choose Size</span>
             <div className="size-options">
-              {product.availableSizes?.map((size) => (
+              {(product.availableSizes || ['S', 'M', 'L']).map((size) => (
                 <button
                   key={size}
                   className={selectedSize === size ? 'active' : ''}
@@ -95,7 +100,7 @@ const Product = () => {
             <span>{quantity}</span>
             <button onClick={() => handleQuantityChange('inc')}>+</button>
           </div>
-          <button className="cart-button">Add to Cart</button>
+          <button className="cart-button" onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
     </div>

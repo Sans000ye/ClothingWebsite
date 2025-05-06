@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ClothingWebsite.Server.Models;
+using System;
 using System.Collections.Generic;
+
 
 namespace ClothingWebsite.Server.Models;
 
@@ -9,7 +11,7 @@ public partial class SanPhamKhachHang
 
     public string MaSanPham { get; set; } = null!;
 
-    public int SoLuong { get; set; }
+    public int? SoLuong { get; set; }
 
     public virtual SanPham MaSanPhamNavigation { get; set; } = null!;
 

@@ -1,9 +1,8 @@
-/* Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400px;0,500;0,700;0,900;1,100;1,300;1,400px;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400px;0,500;0,600;0,700;0,800;1,300;1,400px;1,500;1,600;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400px;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400px;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400px;0,700;0,900;1,100;1,300;1,400px;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400px;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400px;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /* General Styles */
 * {
@@ -12,7 +11,7 @@
     box-sizing: border-box;
 }
 
-body {
+    body {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -27,8 +26,8 @@ h1 {
     font-weight: 700;
 }
 
-/* Utility styles for all elements within Filters */
 .Filters-container * {
+    
     text-decoration: none;
     list-style-type: none;
     background: none;
@@ -41,24 +40,18 @@ h1 {
     gap: 8px;
 }
 
-/* Common Button Styles */
-.btn, .btnType, .size-btn, .btnStyle {
-    font-size: 16px;
-    font-weight: 400;
-    font-family: inherit;
-    cursor: pointer;
-    transition: opacity 0.25s ease;
-    text-align: left;
-    background: none;
-    border: none;
-    outline: none;
-}
-
-/* Specific Button Styles */
+/* General Button Styles */
 .btn {
     width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
     padding: 8px 16px;
-    opacity: 0.8;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.6;
+    transition: opacity 0.25s ease;
+    outline: none;
     position: relative;
 }
 
@@ -71,17 +64,24 @@ h1 {
     font-size: 16px;
     color: inherit;
     opacity: 0.6;
+    transition: opacity 0.25s ease;
 }
 
-.btn:hover, .btnType:hover, .btnStyle:hover, .size-btn:hover {
+.btn:hover {
     opacity: 1;
 }
 
-.btn::after:hover {
+.btn:hover::after {
     opacity: 1;
 }
 
-.btn.selected, .btnType.selected, .size-btn.selected, .btnStyle.selected {
+.btn.selected {
+    opacity: 1;
+    font-weight: bold;
+    outline: none;
+}
+
+.btn.selected::after {
     opacity: 1;
     font-weight: bold;
 }
@@ -91,27 +91,47 @@ h1 {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    margin: 5px;
-    cursor: pointer;
     border: 2px solid rgba(0, 0, 0, 0.25);
-    
+    cursor: pointer;
+    margin: 5px;
 }
 
 .color-btn.selected {
     border: 2px solid black;
 }
 
-.color-btn::after {
-    content: none;
+/* Override for color buttons to remove the ">" symbol */
+.color-btn::after{
+    content: none !important; /* Remove the ">" symbol */
 }
 
 /* Size Button Styles */
 .size-btn {
-    background: #F0F0F0;
-    color: #00000099;
-    padding: 10px 20px;
-    border-radius: 15px;
+    width: fit-content;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 16px;
     opacity: 0.6;
+    transition: opacity 0.25s ease;
+    outline: none;
+    position: relative;
+}
+
+.size-btn::after {
+    content: none !important;
+}
+
+.size-btn:hover {
+    opacity: 1;
+}
+
+.size-btn.selected {
+    opacity: 1;
+    font-weight: bold;
+    outline: none;
 }
 
 /* Apply Button Styles */
@@ -121,10 +141,10 @@ h1 {
     background-color: black;
     color: white;
     border: none;
-    border-radius: 8px;
-    text-align: center;
+    border-radius: 8px  ;
     cursor: pointer;
     transition: opacity 0.3s;
+    text-align: center;
 }
 
 .apply-btn:hover {
@@ -141,27 +161,32 @@ section {
     font-weight: bold;
 }
 
-/* Dropdown Content */
+/* General Dropdown Content */
 .dropdown-content {
     display: none;
     max-height: 0;
     opacity: 0;
-    overflow: hidden;
-    padding: 0;
+    overflow: hidden; /* Prevent overflow by default */
+    padding: 0; /* Remove padding to avoid clipping */
     transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
 .dropdown-content.open {
     display: block;
-    max-height: 500px;
+    max-height: 500px; /* Adjust as needed */
     opacity: 1;
-    overflow: visible;
-    padding: 10px;
+    overflow: visible; /* Allow overflow when open */
+    padding: 10px; /* Add padding only when open */
 }
 
-/* Price Section */
+/* Specific Styling for Price Section */
 .dropdown-content.price {
-    overflow: visible;
+    overflow: visible; /* Ensure the price section allows overflow */
+}
+
+/* Allow overflow for the Price section */
+.dropdown-content.price {
+    overflow: visible; /* Allow overflow for the slider */
 }
 
 /* Price Labels */
@@ -170,7 +195,7 @@ section {
     justify-content: space-between;
     margin-top: 8px;
     font-size: 14px;
-    color: black;
+    color: black; /* Ensure the text is black */
 }
 
 /* Color Definitions */
@@ -182,85 +207,118 @@ section {
 #C6  { background: #F506A4; border: 2px solid rgba(0, 0, 0, 0.25); }
 #C7  { background: #7D06F5; border: 2px solid rgba(0, 0, 0, 0.25); }
 #C8  { background: white;   border: 2px solid rgba(0, 0, 0, 0.25); }
-#C9  { background: black;   border: 2px solid rgba(0, 0, 0, 0.25); }
-#C10 { background: #F5DD06; border: 2px solid rgba(0, 0, 0, 0.25); }
+#C9  { background: black;   border: 2px solid rgba(0, 0, 0, 0.25);}
+#C10 { background: #F5DD06; border: 2px solid rgba(0, 0, 0, 0.25);}
 
-/* Additional Button Types */
-.btnType {    
+.btnType{    
     text-decoration: none;
     width: auto;
-    background-color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 400px;
+    font-family: inherit;
+    background-color: #FFFFFF ;
     color: black;
-    opacity: 0.6;
+    opacity: 60%;
+    cursor: pointer;
+    text-align: left;
     transition: opacity 0.25s;
 }
-
-.btnType:hover { opacity: 1; }
-
-.liType { width: 100%; }
-
-.btn-btnSize {
+.liType{width: 100%;}
+.btnType:hover{opacity: 100%;}
+.btn-btnSize{    
     width: auto;
     margin: 7px;
     border-radius: 100px;
+    font-size: 16px;
+    font-weight: 400px;
+    font-family: inherit;
     background-color: #F0F0F0;
     color: black;
-    opacity: 0.6;
-    transition: opacity 0.25s;
-}
-
-.btn-btnSize.selected { 
-    animation: BtnSelected 0.25s forwards; 
-}
-
-@keyframes BtnSelected {
-    from { background-color: #F0F0F0; color: black; opacity: 0.6; }
-    to { background-color: black; color: white; opacity: 1; }
-}
-
-.btnStyle {
+    opacity: 60%;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.25s;}
+.btn-btnSize.selected{animation: BtnSelected 0.25s;animation-fill-mode: forwards;}
+@keyframes BtnSelected {from {background-color:#F0F0F0; color: black;opacity: 60%;}to{background-color:black;color:white;opacity: 100%;}}
+.btnStyle{
     text-decoration: none;
     width: 100%;
-    background-color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 400px;
+    font-family: inherit;
+    background-color: #FFFFFF ;
     color: black;
-    opacity: 0.6;
+    opacity: 60%;
+    cursor: pointer;
+    text-align: left;
     transition: opacity 0.25s;
 }
-
-.list-content {
+.list-content{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.Filter-icon {    
+.Filter-icon{    
     float: right;
+    right: 0px;
     width: 11.5px;
 }
-
-.Filter-icon-header {
+.Filter-icon-header{
     float: right;
+    right: 0px;
     width: 20.25px;
     height: 18.75px;
     color: #00000066;
-    opacity: 1;
+    opacity: 100%;
 }
-
-.Apply {
+.Apply{
     height: 48px;
-    margin: 24px 0;
+    margin-top: 24px;
+    margin-bottom: 24px;
     width: 100%;
     border-radius: 100px;
+    font-size: 16px;
+    font-weight: 400px;
+    font-family: inherit;
     background-color: black;
     color: white;
     cursor: pointer;
     text-align: center;
     transition: opacity 0.25s;
 }
-
-.btnType.selected,
-.btn-btnSize.selected,
-.btnStyle.selected {
-    opacity: 1;
+.btnType.selected, .btn-btnSize.selected {
     color: black;
+    opacity: 100%;
+}
+.btnStyle.selected {
+    color: black;
+    opacity: 100%;
+}
+
+/* Specific styles for color and size buttons */
+.color-btn
+{
+    border: none; /* Remove border for these buttons */
+    background: none; /* Ensure no background */
+    border-radius: 0; /* Remove any border radius */
+    padding: 8px; /* Adjust padding if needed */
+}
+
+.size-btn{
+    border: none; /* Remove border for these buttons */
+    background: #F0F0F0;/* Ensure no background */
+    color: #00000099;
+    padding: 10px 20px 10px 20px;
+    border-radius: 15px;
+    opacity: 60%;
+}
+
+.color-btn.selected,
+.size-btn.selected {
+    border: none;
+}
+
+.color-btn{
+    border-radius: 100%;
 }

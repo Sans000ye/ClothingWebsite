@@ -1,56 +1,42 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Logging;
 using ClothingWebsite.Server.Models;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<QuanAoContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+// Add services
 builder.Services.AddControllers();
-
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins(
-                "http://localhost:5000", "https://localhost:5000",
-                "http://localhost:53196", "https://localhost:53196")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins("http://localhost:53196")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
-
-    options.AddPolicy("AllowReactApp",
-        builder =>
-        {
-            builder
-                .WithOrigins("http://localhost:53196")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .WithExposedHeaders("*");
-        });
 });
+builder.Services.AddDbContext<QuanAoContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QuanAoContext")));
 
 var app = builder.Build();
 
-app.UseDefaultFiles();
-app.MapStaticAssets();
-
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-app.UseCors("AllowReactApp");
-
+// Configure middleware
+app.UseCors("AllowFrontend");
+app.UseRouting();
 app.UseAuthorization();
+app.UseStaticFiles();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+    RequestPath = "/Images"
+});
 app.MapControllers();
-
-app.MapFallbackToFile("/index.html");
 
 app.Run();

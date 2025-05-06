@@ -33,7 +33,7 @@ const Banner = () => {
       </div>
         </div>
         <div className="banner-image">
-        <img src="http://localhost:53196/images/Banner.png" alt="" />
+        <img src="/images/banner.png" alt="" />
         </div>
       </div>
    

@@ -5,9 +5,9 @@ namespace ClothingWebsite.Server.Models;
 
 public partial class LoaiSanPham
 {
-    public int MaLoai { get; set; }
-
     public string Loai { get; set; } = null!;
+
+    public int MaLoai { get; set; }
 
     public virtual ICollection<SanPham> SanPhams { get; set; } = new List<SanPham>();
 }
