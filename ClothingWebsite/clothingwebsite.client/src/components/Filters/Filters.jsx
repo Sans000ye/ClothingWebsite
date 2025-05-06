@@ -6,8 +6,6 @@ import Divider from '@mui/material/Divider';
 import Slider from '@mui/material/Slider';
 import Casual from '../Casual/Casual.jsx';
 
-
-
 function Filters({ onApply }) {
     const [openSections, setOpenSections] = useState({
         styles: true,
@@ -15,6 +13,7 @@ function Filters({ onApply }) {
         colors: true,
         sizes: true,
         dressStyle: true,
+        types: true,
     });
 
     const toggleSection = (section) => {
@@ -27,39 +26,121 @@ function Filters({ onApply }) {
     const [styleFilter, setStyleFilter] = useState('');
     const [sizeFilter, setSizeFilter] = useState('');
     const [colorFilter, setColorFilter] = useState('');
-    const [priceRange, setPriceRange] = useState([0, 300]);
+    const [priceRange, setPriceRange] = useState([0, 200000]);
+    const [typeFilter, setTypeFilter] = useState('');
 
     const handlePriceChange = (event, newValue) => {
-        const minDistance = 10; // Minimum distance between the two thumbs
+        const minDistance = 10000; // Minimum distance between the two thumbs
         const [minPrice, maxPrice] = newValue;
 
         if (maxPrice - minPrice >= minDistance) {
             setPriceRange(newValue);
         } else if (minPrice === priceRange[0]) {
-            // If the left thumb is being moved, enforce the minimum distance
             setPriceRange([minPrice, minPrice + minDistance]);
         } else {
-            // If the right thumb is being moved, enforce the minimum distance
             setPriceRange([maxPrice - minDistance, maxPrice]);
         }
     };
-    
 
     const handleApplyFilters = () => {
-        const filters = {};
-        if (styleFilter) filters.Style = styleFilter;
-        if (sizeFilter) filters.Size = sizeFilter;
-        if (colorFilter) filters.Mau = colorFilter;
-        if (priceRange[0] !== 0) filters.MinPrice = priceRange[0];
-        if (priceRange[1] !== 300) filters.MaxPrice = priceRange[1];
-    
-        console.log("📤 Filters gửi về parent:", filters);
-    
+        // Check if all filters are at their default values
+        const isDefault =
+            !styleFilter &&
+            !sizeFilter &&
+            !colorFilter &&
+            priceRange[0] === 0 &&
+            priceRange[1] === 200000;
+
+        if (isDefault) {
+            // Send an empty filter object to reset and get the full list
+            if (onApply) {
+                onApply({});
+            }
+            return;
+        }
+
+        const filters = {
+            maSanPham: "",
+            tenSanPham: "",
+            maLoai: 0,
+            maMau: 0,
+            maSize: 0,
+            maStyle: 0,
+            hinhAnh: "",
+            soLuong: 0,
+            minGia: priceRange[0],
+            maxGia: priceRange[1]
+        };
+
+        if (styleFilter) {
+            const styleMap = {
+                "Casual": 20,
+                "Formal": 21,
+                "Party": 22,
+                "Gym": 23
+            };
+            filters.maStyle = styleMap[styleFilter] || 0;
+        }
+
+        if (sizeFilter) {
+            const sizeMap = {
+                "XX-Small": 111,
+                "X-Small": 112,
+                "Small": 113,
+                "Medium": 114,
+                "Large": 115,
+                "X-Large": 116,
+                "XX-Large": 117,
+                "3X-Large": 118,
+                "4X-Large": 119
+            };
+            filters.maSize = sizeMap[sizeFilter] || 0;
+        }
+
+        if (typeFilter) {
+            const typeMap = {
+                "T-Shirts": 1,
+                "Shorts": 2,
+                "Shirts": 3,
+                "Hoodie": 4,
+                "Jeans": 5
+            };
+            filters.maLoai = typeMap[typeFilter] || 0;
+        }
+
+        if (colorFilter) {
+            const colorMap = {
+                "White": 9,
+                "Black": 10,
+                "Green": 11,
+                "Red": 12,
+                "Yellow": 13,
+                "Orange": 14,
+                "LightBlue": 15,
+                "Blue": 16,
+                "Purple": 17,
+                "Pink": 18
+            };
+            filters.maMau = colorMap[colorFilter] || 0;
+        }
+
         if (onApply) {
-            onApply(filters); // ✅ gọi fetchProducts từ Casual.jsx
+            onApply(filters);
         }
     };
-    
+
+    const colorLabels = [
+        { name: "White", code: "White", display: "White" },
+        { name: "Black", code: "Black", display: "Black" },
+        { name: "Green", code: "Green", display: "Green" },
+        { name: "Red", code: "Red", display: "Red" },
+        { name: "Yellow", code: "Yellow", display: "Yellow" },
+        { name: "Orange", code: "Orange", display: "Orange" },
+        { name: "LightBlue", code: "LightBlue", display: "Light Blue" },
+        { name: "Blue", code: "Blue", display: "Blue" },
+        { name: "Purple", code: "Purple", display: "Purple" },
+        { name: "Pink", code: "Pink", display: "Pink" }
+    ];
 
     return (
         <div className="Filters-container">
@@ -67,6 +148,30 @@ function Filters({ onApply }) {
                 <ListItem>
                     <h1>Filters</h1>
                 </ListItem>
+                <Divider variant="middle"/>
+
+                {/* Types Section */}
+                <section>
+                    <h2
+                        onClick={() => toggleSection('types')}
+                        className="dropdown-header"
+                    >
+                        Types
+                    </h2>
+                    <div className={`dropdown-content ${openSections.types ? 'open' : ''}`}>
+                        <div className="button-container">
+                            {['T-Shirts', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'].map((type) => (
+                                <button
+                                    key={type}
+                                    className={`btn ${typeFilter === type ? 'selected' : ''}`}
+                                    onClick={() => setTypeFilter(typeFilter === type ? '' : type)}
+                                >
+                                    {type}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </section>
                 <Divider variant="middle"/>
 
                 {/* Styles Section */}
@@ -106,17 +211,17 @@ function Filters({ onApply }) {
                             <Slider
                                 value={priceRange}
                                 onChange={handlePriceChange}
-                                valueLabelDisplay="off" /* Disable the default labels */
+                                valueLabelDisplay="off"
                                 min={0}
-                                max={300}
+                                max={200000}
+                                step={10000}
                             />
-                            {/* Price Labels */}
                             <div className="price-labels">
                                 <span
                                     style={{
                                         position: 'absolute',
-                                        left: `${(priceRange[0] / 300) * 100}%`,
-                                        transform: priceRange[1] - priceRange[0] < 10 ? 'translateX(-100%)' : 'translateX(-50%)',
+                                        left: `${(priceRange[0] / 200000) * 100}%`,
+                                        transform: priceRange[1] - priceRange[0] < 10000 ? 'translateX(-100%)' : 'translateX(-50%)',
                                         textAlign: 'center',
                                     }}
                                 >
@@ -125,8 +230,8 @@ function Filters({ onApply }) {
                                 <span
                                     style={{
                                         position: 'absolute',
-                                        left: `${(priceRange[1] / 300) * 100}%`,
-                                        transform: priceRange[1] - priceRange[0] < 10 ? 'translateX(0%)' : 'translateX(-50%)',
+                                        left: `${(priceRange[1] / 200000) * 100}%`,
+                                        transform: priceRange[1] - priceRange[0] < 10000 ? 'translateX(0%)' : 'translateX(-50%)',
                                         textAlign: 'center',
                                     }}
                                 >
@@ -148,14 +253,14 @@ function Filters({ onApply }) {
                     </h2>
                     <div className={`dropdown-content ${openSections.colors ? 'open' : ''}`}>
                         <div className="button-container">
-                            {['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10'].map((colorId) => (
+                            {colorLabels.map((color) => (
                                 <button
-                                    key={colorId}
-                                    id={colorId}
-                                    className={`btn color-btn ${colorFilter === colorId ? 'selected' : ''}`}
-                                    onClick={() => setColorFilter(colorFilter === colorId ? '' : colorId)}
+                                    key={color.code}
+                                    id={color.code}
+                                    className={`btn color-btn ${colorFilter === color.code ? 'selected' : ''}`}
+                                    onClick={() => setColorFilter(colorFilter === color.code ? '' : color.code)}
                                 >
-                                    {/* No ">" symbol here */}
+                                    {/* No text inside the button */}
                                 </button>
                             ))}
                         </div>

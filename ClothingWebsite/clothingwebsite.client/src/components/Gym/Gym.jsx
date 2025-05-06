@@ -82,7 +82,7 @@ const Gym = () => {
   const fetchProducts = async (filters = {}) => {
     try {
       const response = await axios.post("http://localhost:7232/api/SanPham/ApplyFilters", {
-        Type: "Gym", // Loại sản phẩm là Gym
+        Type: "Gym",
         ...filters
       });
       if (response.data?.length > 0) {

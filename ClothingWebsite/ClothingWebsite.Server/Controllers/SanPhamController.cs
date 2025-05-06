@@ -67,35 +67,45 @@ namespace ClothingWebsite.Server.Controllers
         }
 
         [HttpPost("ApplyFilters")]
-        public async Task<IActionResult> ApplyFilters([FromBody] FilterCriteria criteria)
+        public async Task<IActionResult> ApplyFilters([FromBody] SanPhamFilter filter)
         {
-            try
-            {
-                var query = _context.SanPhams
-                    .Include(p => p.MaLoaiNavigation)
-                    .Include(p => p.MaStyleNavigation)
-                    .Include(p => p.MaSizeNavigation)
-                    .Include(p => p.MaMauNavigation)
-                    .AsQueryable();
+            var query = _context.SanPhams.AsQueryable();
 
-                if (!string.IsNullOrEmpty(criteria.Type))
-                {
-                    query = query.Where(p => p.MaLoaiNavigation != null && 
-                                            p.MaLoaiNavigation.Loai.ToLower() == criteria.Type.ToLower());
-                }
+            if (!string.IsNullOrWhiteSpace(filter.MaSanPham))
+                query = query.Where(p => p.MaSanPham == filter.MaSanPham);
 
-                var results = await query
-                    .Select(t => CSanPham.chuyendoi(t))
-                    .ToListAsync();
+            if (!string.IsNullOrWhiteSpace(filter.TenSanPham))
+                query = query.Where(p => p.TenSanPham.Contains(filter.TenSanPham));
 
-                return results.Any() 
-                    ? Ok(results) 
-                    : NotFound(new { message = "Không tìm thấy sản phẩm phù hợp." });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = $"Lỗi khi lọc sản phẩm: {ex.Message}" });
-            }
+            if (filter.MaLoai != 0)
+                query = query.Where(p => p.MaLoai == filter.MaLoai);
+
+            if (filter.MaMau != 0)
+                query = query.Where(p => p.MaMau == filter.MaMau);
+
+            if (filter.MaSize != 0)
+                query = query.Where(p => p.MaSize == filter.MaSize);
+
+            if (filter.MaStyle != 0)
+                query = query.Where(p => p.MaStyle == filter.MaStyle);
+
+            if (!string.IsNullOrWhiteSpace(filter.HinhAnh))
+                query = query.Where(p => p.HinhAnh == filter.HinhAnh);
+
+            if (filter.MinGia.HasValue)
+                query = query.Where(p => p.Gia >= filter.MinGia.Value);
+
+            if (filter.MaxGia.HasValue && filter.MaxGia.Value > 0)
+                query = query.Where(p => p.Gia <= filter.MaxGia.Value);
+
+            if (filter.SoLuong != 0)
+                query = query.Where(p => p.SoLuong == filter.SoLuong);
+
+            var results = await query
+                .Select(t => CSanPham.chuyendoi(t))
+                .ToListAsync();
+
+            return Ok(results);
         }
 
         [HttpPost]

@@ -199,16 +199,16 @@ section {
 }
 
 /* Color Definitions */
-#C1  { background: #F50606; border: 2px solid rgba(0, 0, 0, 0.25); }
-#C2  { background: #00C12B; border: 2px solid rgba(0, 0, 0, 0.25); }
-#C3  { background: #F57906; border: 2px solid rgba(0, 0, 0, 0.25); }
-#C4  { background: #06CAF5; border: 2px solid rgba(0, 0, 0, 0.25); }
-#C5  { background: #063AF5; border: 2px solid rgba(0, 0, 0, 0.25); }
-#C6  { background: #F506A4; border: 2px solid rgba(0, 0, 0, 0.25); }
-#C7  { background: #7D06F5; border: 2px solid rgba(0, 0, 0, 0.25); }
-#C8  { background: white;   border: 2px solid rgba(0, 0, 0, 0.25); }
-#C9  { background: black;   border: 2px solid rgba(0, 0, 0, 0.25);}
-#C10 { background: #F5DD06; border: 2px solid rgba(0, 0, 0, 0.25);}
+#White      { background: #fff;    border: 2px solid rgba(0, 0, 0, 0.25);}
+#Black      { background: #000;    border: 2px solid rgba(0, 0, 0, 0.25);}
+#Green      { background: #008000; border: 2px solid rgba(0, 0, 0, 0.25);}
+#Red        { background: #F50606; border: 2px solid rgba(0, 0, 0, 0.25);} 
+#Yellow     { background: #F5DD06; border: 2px solid rgba(0, 0, 0, 0.25);}
+#Orange     { background: #F57906; border: 2px solid rgba(0, 0, 0, 0.25);}
+#LightBlue  { background: #06CAF5; border: 2px solid rgba(0, 0, 0, 0.25);}
+#Blue       { background: #063AF5; border: 2px solid rgba(0, 0, 0, 0.25);}
+#Purple     { background: #7D06F5; border: 2px solid rgba(0, 0, 0, 0.25);}
+#Pink       { background: #F506A4; border: 2px solid rgba(0, 0, 0, 0.25);}
 
 .btnType{    
     text-decoration: none;
