@@ -27,13 +27,7 @@ function Header() {
             <ul className="nav-links">
               <li className="dropdown">
                 <Link to="/Sort/shop">Shop ▾</Link>
-                <ul className="dropdown-menu">
-                  <li><Link to="/Sort/tshirt">T-shirts</Link></li>
-                  <li><Link to="/Sort/short">Shorts</Link></li>
-                  <li><Link to="/Sort/shirt">Shirts</Link></li>
-                  <li><Link to="/Sort/hoodie">Hoodie</Link></li>
-                  <li><Link to="/Sort/jean">Jeans</Link></li>
-                </ul>
+            
               </li>
               <li><a href="/sale">On Sale</a></li>
               <li><a href="/new-arrivals">New Arrivals</a></li>
