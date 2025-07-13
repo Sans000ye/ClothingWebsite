@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+.promo-banner {
+    width: auto;
+    height: 38px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .promo-text {
+    color: white;
+    font-size: 19px;
+    font-weight: 300;
+    width: 500px;
+    text-align: center;
+  }
+  
+  .promo-link {
+    text-decoration: underline;
+    font-weight: 400;
+    color:white;
+  }
+  
+  .promo-close {
+    position: absolute;
+    right: 16px;
+    color: white;
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  @media (max-width: 1440px) {
+    .promo-banner {
+      width: 100%; /* Chiều rộng sẽ co lại trên màn hình nhỏ hơn 1440px */
+      box-sizing: border-box; 
+    }
+  }
+  

@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:53196",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\vuong\\Desktop\\All Project\\Thinh\\WebQuanAo\\ClothingWebsite-master\\ClothingWebsite\\ClothingWebsite.Server\\..\\clothingwebsite.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

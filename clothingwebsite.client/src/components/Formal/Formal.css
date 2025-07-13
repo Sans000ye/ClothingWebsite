@@ -1,0 +1,123 @@
+/* Formal.css */
+
+.formal-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    margin-left: 80px;
+  }
+  
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product-card {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px; /* Thêm khoảng cách giữa các sản phẩm */
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
+  
+  .product-info {
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .product-rating {
+    color: #ffa500;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .product-price {
+    font-size: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .price {
+    font-weight: bold;
+  }
+
+  .original-price {
+    text-decoration: line-through;
+    color: gray;
+  }
+
+  .discount {
+    color: red;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  
+  .pagination button {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    font-weight: 500;
+    /* transition: background 0.3s; */
+  }
+  
+  .pagination button.active,
+  .pagination button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .formal-content {
+    display: flex;
+    align-items: flex-start; /* Giữ filters và products cùng hàng */
+  }
+
+  .filters-column {
+    width: 250px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column; /* Đặt các phần tử trong cột theo chiều dọc */
+    gap: 20px; /* Khoảng cách giữa các bộ lọc */
+  }
+  
+  .products-column {
+    flex: 1;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+  }

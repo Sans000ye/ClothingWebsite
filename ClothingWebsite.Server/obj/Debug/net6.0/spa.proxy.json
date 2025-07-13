@@ -1,0 +1,8 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:53196",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\vuong\\Desktop\\All Project\\ClothingWebsite\\ClothingWebsite\\ClothingWebsite.Server\\..\\clothingwebsite.client",
+"MaxTimeoutInSeconds": "120"
+}
+}

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClothingWebsite.Server", "ClothingWebsite.Server\ClothingWebsite.Server.csproj", "{238DE92A-A55A-41AA-99C5-FD02EC0082E3}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "clothingwebsite.client", "clothingwebsite.client\clothingwebsite.client.esproj", "{26F4363A-0D16-4E72-8D9B-9DFCA2C590AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{238DE92A-A55A-41AA-99C5-FD02EC0082E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238DE92A-A55A-41AA-99C5-FD02EC0082E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238DE92A-A55A-41AA-99C5-FD02EC0082E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238DE92A-A55A-41AA-99C5-FD02EC0082E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26F4363A-0D16-4E72-8D9B-9DFCA2C590AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26F4363A-0D16-4E72-8D9B-9DFCA2C590AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26F4363A-0D16-4E72-8D9B-9DFCA2C590AF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{26F4363A-0D16-4E72-8D9B-9DFCA2C590AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26F4363A-0D16-4E72-8D9B-9DFCA2C590AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26F4363A-0D16-4E72-8D9B-9DFCA2C590AF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67C289D2-B49F-4CBC-9835-B83D0309FF87}
+	EndGlobalSection
+EndGlobal

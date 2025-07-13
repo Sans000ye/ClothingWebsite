@@ -1,0 +1,155 @@
+.footer {
+  background-color: #f8f8f8;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.newsletter {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; /* Đẩy h2 về trái, input về phải */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  width: 1000px; /* Giới hạn chiều rộng */
+  height: 120px;
+  margin: 0 auto; /* Căn giữa phần tử */
+  border-radius: 30px; /* Bo góc nhẹ để đẹp hơn */
+}
+
+.newsletter h2 {
+  font-size: 40px;
+  font-weight: bold;
+  flex: 1;
+  text-align: left;
+  color: white;
+}
+
+.newsletter-input {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 10px;
+}
+
+.newsletter-input input {
+  padding: 10px;
+  width: 320px;
+  border: none;
+  border-radius: 20px;
+}
+
+.newsletter-input button {
+  padding: 10px;
+  width: 320px;
+  border: none;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+.footer-content {
+  display: flex;
+  justify-content:space-around;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  text-align: left;
+}
+
+.footer-section h3 {
+  font-size: 16px;
+  font-weight:normal;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 8px 0;
+  color: gray;
+  cursor: pointer;
+}
+
+.about h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.about p {
+  color: gray;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.icon {
+  font-size: 18px;
+  color: black;
+  cursor: pointer;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  color: gray;
+}
+
+.payment-icons img {
+  width: 40px;
+  margin-left: 10px;
+}
+
+/* Thêm vào cuối file */
+.notification {
+margin-top: 10px;
+padding: 8px 12px;
+border-radius: 4px;
+font-size: 14px;
+width: 100%;
+text-align: center;
+}
+
+/* Thêm vào cuối file */
+.notification-popup {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+padding: 20px 40px;
+border-radius: 8px;
+font-size: 18px;
+font-weight: bold;
+z-index: 1000;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+animation: fadeIn 0.3s ease-in-out;
+}
+
+.notification-popup.success {
+background-color: #4caf50;
+color: white;
+}
+
+.notification-popup.error {
+background-color: #f44336;
+color: white;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translate(-50%, -60%); }
+to { opacity: 1; transform: translate(-50%, -50%); }
+}

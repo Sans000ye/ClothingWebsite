@@ -1,0 +1,5 @@
+C:\Users\vuong\Desktop\All Project\ClothingWebsite\ClothingWebsite\clothingwebsite.client\obj\Debug\clothingwebsite.client.esproj.CoreCompileInputs.cache
+C:\Users\vuong\Desktop\All Project\ClothingWebsite\QuanAo\ClothingWebsite\ClothingWebsite\clothingwebsite.client\obj\Debug\clothingwebsite.client.esproj.CoreCompileInputs.cache
+C:\Users\vuong\Desktop\All Project\cloth\ClothingWebsite\ClothingWebsite\clothingwebsite.client\obj\Debug\clothingwebsite.client.esproj.CoreCompileInputs.cache
+D:\Sturdy\web_and_aplication\xdpmWeb\ClothingWebsite\clothingwebsite.client\obj\Debug\clothingwebsite.client.esproj.CoreCompileInputs.cache
+C:\Users\vuong\Desktop\All Project\Thinh\WebQuanAo\ClothingWebsite-master\ClothingWebsite\clothingwebsite.client\obj\Debug\clothingwebsite.client.esproj.CoreCompileInputs.cache
